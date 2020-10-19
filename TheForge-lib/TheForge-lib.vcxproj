@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{07DED686-258E-4720-A6AE-11870B6B17AD}</ProjectGuid>
+    <RootNamespace>TheForgelib</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>false</ConformanceMode>
+      <PreprocessorDefinitions>DIRECT3D12;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\The-Forge\Common_3\OS\Camera\CameraController.cpp" />
+    <ClCompile Include="..\The-Forge\Common_3\OS\Core\ThreadSystem.cpp" />
+    <ClCompile Include="..\The-Forge\Common_3\OS\Core\Timer.cpp" />
+    <ClCompile Include="..\The-Forge\Common_3\OS\FileSystem\FileSystem.cpp" />
+    <ClCompile Include="..\The-Forge\Common_3\OS\FileSystem\SystemRun.cpp" />
+    <ClCompile Include="..\The-Forge\Common_3\OS\FileSystem\ZipFileSystem.cpp" />
+    <ClCompile Include="..\The-Forge\Common_3\OS\Input\InputSystem.cpp" />
+    <ClCompile Include="..\The-Forge\Common_3\OS\Logging\Log.cpp" />
+    <ClCompile Include="..\The-Forge\Common_3\OS\MemoryTracking\MemoryTracking.cpp" />
+    <ClCompile Include="..\The-Forge\Common_3\OS\Profiler\GpuProfiler.cpp" />
+    <ClCompile Include="..\The-Forge\Common_3\OS\Profiler\ProfilerBase.cpp" />
+    <ClCompile Include="..\The-Forge\Common_3\OS\Profiler\ProfilerWidgetsUI.cpp" />
+    <ClCompile Include="..\The-Forge\Common_3\OS\Windows\WindowsBase.cpp" />
+    <ClCompile Include="..\The-Forge\Common_3\OS\Windows\WindowsFileSystem.cpp" />
+    <ClCompile Include="..\The-Forge\Common_3\OS\Windows\WindowsLog.cpp" />
+    <ClCompile Include="..\The-Forge\Common_3\OS\Windows\WindowsStackTraceDump.cpp" />
+    <ClCompile Include="..\The-Forge\Common_3\OS\Windows\WindowsThread.cpp" />
+    <ClCompile Include="..\The-Forge\Common_3\OS\Windows\WindowsTime.cpp" />
+    <ClCompile Include="..\The-Forge\Common_3\Renderer\CommonShaderReflection.cpp" />
+    <ClCompile Include="..\The-Forge\Common_3\Renderer\Direct3D12\Direct3D12.cpp" />
+    <ClCompile Include="..\The-Forge\Common_3\Renderer\Direct3D12\Direct3D12Hooks.cpp" />
+    <ClCompile Include="..\The-Forge\Common_3\Renderer\Direct3D12\Direct3D12Raytracing.cpp" />
+    <ClCompile Include="..\The-Forge\Common_3\Renderer\Direct3D12\Direct3D12ShaderReflection.cpp" />
+    <ClCompile Include="..\The-Forge\Common_3\Renderer\ResourceLoader.cpp" />
+    <ClCompile Include="..\The-Forge\Common_3\ThirdParty\OpenSource\EASTL\eastl.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\The-Forge\Common_3\OS\Core\Atomics.h" />
+    <ClInclude Include="..\The-Forge\Common_3\OS\Core\Compiler.h" />
+    <ClInclude Include="..\The-Forge\Common_3\OS\Core\DLL.h" />
+    <ClInclude Include="..\The-Forge\Common_3\OS\Core\GPUConfig.h" />
+    <ClInclude Include="..\The-Forge\Common_3\OS\Core\RingBuffer.h" />
+    <ClInclude Include="..\The-Forge\Common_3\OS\Core\TextureContainers.h" />
+    <ClInclude Include="..\The-Forge\Common_3\OS\Core\ThreadSystem.h" />
+    <ClInclude Include="..\The-Forge\Common_3\OS\Interfaces\IApp.h" />
+    <ClInclude Include="..\The-Forge\Common_3\OS\Interfaces\ICameraController.h" />
+    <ClInclude Include="..\The-Forge\Common_3\OS\Interfaces\IFileSystem.h" />
+    <ClInclude Include="..\The-Forge\Common_3\OS\Interfaces\IInput.h" />
+    <ClInclude Include="..\The-Forge\Common_3\OS\Interfaces\ILog.h" />
+    <ClInclude Include="..\The-Forge\Common_3\OS\Interfaces\IMemory.h" />
+    <ClInclude Include="..\The-Forge\Common_3\OS\Interfaces\IMiddleware.h" />
+    <ClInclude Include="..\The-Forge\Common_3\OS\Interfaces\IOperatingSystem.h" />
+    <ClInclude Include="..\The-Forge\Common_3\OS\Interfaces\IProfiler.h" />
+    <ClInclude Include="..\The-Forge\Common_3\OS\Interfaces\IThread.h" />
+    <ClInclude Include="..\The-Forge\Common_3\OS\Interfaces\ITime.h" />
+    <ClInclude Include="..\The-Forge\Common_3\OS\Logging\Log.h" />
+    <ClInclude Include="..\The-Forge\Common_3\OS\Math\MathTypes.h" />
+    <ClInclude Include="..\The-Forge\Common_3\OS\MemoryTracking\NoMemoryDefines.h" />
+    <ClInclude Include="..\The-Forge\Common_3\OS\Profiler\GpuProfiler.h" />
+    <ClInclude Include="..\The-Forge\Common_3\OS\Profiler\ProfilerBase.h" />
+    <ClInclude Include="..\The-Forge\Common_3\OS\Profiler\ProfilerHTML.h" />
+    <ClInclude Include="..\The-Forge\Common_3\OS\Windows\WindowsStackTraceDump.h" />
+    <ClInclude Include="..\The-Forge\Common_3\Renderer\Direct3D12\Direct3D12CapBuilder.h" />
+    <ClInclude Include="..\The-Forge\Common_3\Renderer\Direct3D12\Direct3D12Hooks.h" />
+    <ClInclude Include="..\The-Forge\Common_3\Renderer\IRay.h" />
+    <ClInclude Include="..\The-Forge\Common_3\Renderer\IRenderer.h" />
+    <ClInclude Include="..\The-Forge\Common_3\Renderer\IResourceLoader.h" />
+    <ClInclude Include="..\The-Forge\Common_3\Renderer\IShaderReflection.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

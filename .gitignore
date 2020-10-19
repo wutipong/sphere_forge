@@ -48,3 +48,6 @@ Thumbs.db
 *.mov
 *.wmv
 
+/sphere_forge/.vs/sphere_forge/v15
+/sphere_forge/x64/Debug
+/TheForge-lib/x64/Debug

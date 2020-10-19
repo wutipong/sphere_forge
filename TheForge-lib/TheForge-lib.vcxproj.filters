@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="OS\Camera">
+      <UniqueIdentifier>{b718f161-e4dc-424a-b72f-bca42e4d1693}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OS">
+      <UniqueIdentifier>{82e42552-0420-41c7-866b-60168086ef5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OS\Core">
+      <UniqueIdentifier>{5832dbab-6627-4189-b7b2-05851f655cbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OS\FileSystem">
+      <UniqueIdentifier>{1037d0e2-395f-4915-8117-7015fb610894}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OS\Input">
+      <UniqueIdentifier>{3a539f38-e19c-4d02-97a0-c4140906ed21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OS\Logging">
+      <UniqueIdentifier>{93ea155c-b967-4678-81e2-4a370ed22359}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OS\MemoryTracking">
+      <UniqueIdentifier>{9f4a6f66-d78f-43fd-b789-b342ae866b1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OS\Profiler">
+      <UniqueIdentifier>{2d7b2e0e-b665-4941-be51-76ad02e997b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OS\Windows">
+      <UniqueIdentifier>{6cf108d4-9d67-48d3-9ab7-5c44704ed074}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{d95795f0-611d-4ae9-bbea-60784a2d0fdf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\Direct3D12">
+      <UniqueIdentifier>{aab78c4f-72aa-4184-a320-22b08b664dd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\OpenSource\EASTL">
+      <UniqueIdentifier>{4f708065-3bd8-4298-aea7-402fb2d6bce8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\OpenSource">
+      <UniqueIdentifier>{d7d678e0-5f0a-43f1-bee9-6fd3ac180c09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty">
+      <UniqueIdentifier>{1ed9a355-7819-49e5-8d3f-639863345117}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OS\Interfaces">
+      <UniqueIdentifier>{228b4f33-a9fe-4aa4-9fb1-8a65a3284a69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OS\Math">
+      <UniqueIdentifier>{5c1b0445-c384-4456-b10e-ff08dc75cfd6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\The-Forge\Common_3\OS\Camera\CameraController.cpp">
+      <Filter>OS\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\The-Forge\Common_3\OS\Core\ThreadSystem.cpp">
+      <Filter>OS\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\The-Forge\Common_3\OS\Core\Timer.cpp">
+      <Filter>OS\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\The-Forge\Common_3\OS\FileSystem\FileSystem.cpp">
+      <Filter>OS\FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\The-Forge\Common_3\OS\FileSystem\SystemRun.cpp">
+      <Filter>OS\FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\The-Forge\Common_3\OS\FileSystem\ZipFileSystem.cpp">
+      <Filter>OS\FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\The-Forge\Common_3\OS\Input\InputSystem.cpp">
+      <Filter>OS\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\The-Forge\Common_3\OS\Logging\Log.cpp">
+      <Filter>OS\Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="..\The-Forge\Common_3\OS\MemoryTracking\MemoryTracking.cpp">
+      <Filter>OS\MemoryTracking</Filter>
+    </ClCompile>
+    <ClCompile Include="..\The-Forge\Common_3\OS\Profiler\GpuProfiler.cpp">
+      <Filter>OS\Profiler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\The-Forge\Common_3\OS\Profiler\ProfilerBase.cpp">
+      <Filter>OS\Profiler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\The-Forge\Common_3\OS\Profiler\ProfilerWidgetsUI.cpp">
+      <Filter>OS\Profiler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\The-Forge\Common_3\OS\Windows\WindowsBase.cpp">
+      <Filter>OS\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\The-Forge\Common_3\OS\Windows\WindowsFileSystem.cpp">
+      <Filter>OS\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\The-Forge\Common_3\OS\Windows\WindowsLog.cpp">
+      <Filter>OS\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\The-Forge\Common_3\OS\Windows\WindowsStackTraceDump.cpp">
+      <Filter>OS\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\The-Forge\Common_3\OS\Windows\WindowsThread.cpp">
+      <Filter>OS\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\The-Forge\Common_3\OS\Windows\WindowsTime.cpp">
+      <Filter>OS\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\The-Forge\Common_3\Renderer\CommonShaderReflection.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\The-Forge\Common_3\Renderer\ResourceLoader.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\The-Forge\Common_3\Renderer\Direct3D12\Direct3D12.cpp">
+      <Filter>Renderer\Direct3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="..\The-Forge\Common_3\Renderer\Direct3D12\Direct3D12Hooks.cpp">
+      <Filter>Renderer\Direct3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="..\The-Forge\Common_3\Renderer\Direct3D12\Direct3D12Raytracing.cpp">
+      <Filter>Renderer\Direct3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="..\The-Forge\Common_3\Renderer\Direct3D12\Direct3D12ShaderReflection.cpp">
+      <Filter>Renderer\Direct3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="..\The-Forge\Common_3\ThirdParty\OpenSource\EASTL\eastl.cpp">
+      <Filter>ThirdParty\OpenSource\EASTL</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\The-Forge\Common_3\OS\Core\Atomics.h">
+      <Filter>OS\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\The-Forge\Common_3\OS\Core\Compiler.h">
+      <Filter>OS\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\The-Forge\Common_3\OS\Core\DLL.h">
+      <Filter>OS\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\The-Forge\Common_3\OS\Core\GPUConfig.h">
+      <Filter>OS\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\The-Forge\Common_3\OS\Core\RingBuffer.h">
+      <Filter>OS\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\The-Forge\Common_3\OS\Core\TextureContainers.h">
+      <Filter>OS\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\The-Forge\Common_3\OS\Core\ThreadSystem.h">
+      <Filter>OS\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\The-Forge\Common_3\OS\Logging\Log.h">
+      <Filter>OS\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\The-Forge\Common_3\OS\MemoryTracking\NoMemoryDefines.h">
+      <Filter>OS\MemoryTracking</Filter>
+    </ClInclude>
+    <ClInclude Include="..\The-Forge\Common_3\OS\Profiler\GpuProfiler.h">
+      <Filter>OS\Profiler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\The-Forge\Common_3\OS\Profiler\ProfilerBase.h">
+      <Filter>OS\Profiler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\The-Forge\Common_3\OS\Profiler\ProfilerHTML.h">
+      <Filter>OS\Profiler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\The-Forge\Common_3\OS\Windows\WindowsStackTraceDump.h">
+      <Filter>OS\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\The-Forge\Common_3\OS\Interfaces\IApp.h">
+      <Filter>OS\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\The-Forge\Common_3\OS\Interfaces\ICameraController.h">
+      <Filter>OS\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\The-Forge\Common_3\OS\Interfaces\IFileSystem.h">
+      <Filter>OS\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\The-Forge\Common_3\OS\Interfaces\IInput.h">
+      <Filter>OS\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\The-Forge\Common_3\OS\Interfaces\ILog.h">
+      <Filter>OS\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\The-Forge\Common_3\OS\Interfaces\IMemory.h">
+      <Filter>OS\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\The-Forge\Common_3\OS\Interfaces\IMiddleware.h">
+      <Filter>OS\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\The-Forge\Common_3\OS\Interfaces\IOperatingSystem.h">
+      <Filter>OS\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\The-Forge\Common_3\OS\Interfaces\IProfiler.h">
+      <Filter>OS\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\The-Forge\Common_3\OS\Interfaces\IThread.h">
+      <Filter>OS\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\The-Forge\Common_3\OS\Interfaces\ITime.h">
+      <Filter>OS\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\The-Forge\Common_3\OS\Math\MathTypes.h">
+      <Filter>OS\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\The-Forge\Common_3\Renderer\IRay.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\The-Forge\Common_3\Renderer\IRenderer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\The-Forge\Common_3\Renderer\IResourceLoader.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\The-Forge\Common_3\Renderer\IShaderReflection.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\The-Forge\Common_3\Renderer\Direct3D12\Direct3D12CapBuilder.h">
+      <Filter>Renderer\Direct3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="..\The-Forge\Common_3\Renderer\Direct3D12\Direct3D12Hooks.h">
+      <Filter>Renderer\Direct3D12</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
