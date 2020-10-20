@@ -1,3 +1,4 @@
+#include <OS/Core/RingBuffer.h>
 #include <OS/Interfaces/IApp.h>
 #include <OS/Interfaces/ICameraController.h>
 #include <OS/Interfaces/IInput.h>
@@ -37,7 +38,7 @@ Shader *pShader = NULL;
 Buffer *pVertexBuffer = NULL;
 Pipeline *pPipeline = NULL;
 
-Buffer *pProjViewUniformBuffer[gImageCount] = {NULL};
+GPURingBuffer *pProjViewUniformBuffer[gImageCount] = {NULL};
 
 uint32_t gFrameIndex = 0;
 ProfileToken gGpuProfileToken = PROFILE_INVALID_TOKEN;
@@ -148,15 +149,8 @@ class App : public IApp {
                               gImageCount};
     addDescriptorSet(pRenderer, &desc, &pDescriptorSetUniforms);
 
-    BufferLoadDesc ubDesc = {};
-    ubDesc.mDesc.mDescriptors = DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-    ubDesc.mDesc.mMemoryUsage = RESOURCE_MEMORY_USAGE_CPU_TO_GPU;
-    ubDesc.mDesc.mSize = sizeof(UniformBlock);
-    ubDesc.mDesc.mFlags = BUFFER_CREATION_FLAG_PERSISTENT_MAP_BIT;
-    ubDesc.pData = NULL;
     for (uint32_t i = 0; i < gImageCount; ++i) {
-      ubDesc.ppBuffer = &pProjViewUniformBuffer[i];
-      addResource(&ubDesc, NULL);
+	  addUniformGPURingBuffer(pRenderer, 1024, &pProjViewUniformBuffer[i], true);
     }
 
     if (!gAppUI.Init(pRenderer))
@@ -226,11 +220,13 @@ class App : public IApp {
 
     // Need to free memory;
     tf_free(pSpherePoints);
-
+	
+	auto size = sizeof(UniformBlock);
     for (uint32_t i = 0; i < gImageCount; ++i) {
       DescriptorData params[1] = {};
-      params[0].pName = "uniformBlock";
-      params[0].ppBuffers = &pProjViewUniformBuffer[i];
+      params[0].pName = "rootcbv";
+      params[0].ppBuffers = &pProjViewUniformBuffer[i]->pBuffer;
+	  params[0].pSizes = &size;
       updateDescriptorSet(pRenderer, i, pDescriptorSetUniforms, 1, params);
     }
 
@@ -250,7 +246,7 @@ class App : public IApp {
     exitProfiler();
 
     for (uint32_t i = 0; i < gImageCount; ++i) {
-      removeResource(pProjViewUniformBuffer[i]);
+	  removeGPURingBuffer(pProjViewUniformBuffer[i]);
     }
 
     removeDescriptorSet(pRenderer, pDescriptorSetUniforms);
@@ -430,7 +426,8 @@ class App : public IApp {
       waitForFences(pRenderer, 1, &pRenderCompleteFence);
 
     // Update uniform buffers
-    BufferUpdateDesc viewProjCbv = {pProjViewUniformBuffer[gFrameIndex]};
+	GPURingBufferOffset offset = getGPURingBufferOffset(pProjViewUniformBuffer[gFrameIndex], sizeof(UniformBlock), 0);
+	BufferUpdateDesc viewProjCbv = { offset.pBuffer, offset.mOffset };
     beginUpdateResource(&viewProjCbv);
     *(UniformBlock *)viewProjCbv.pMappedData = gUniformData;
     endUpdateResource(&viewProjCbv, NULL);
