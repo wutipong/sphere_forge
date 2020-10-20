@@ -20,7 +20,7 @@ struct UniformBlock {
 Renderer *pRenderer = NULL;
 constexpr size_t gImageCount = 3;
 
-constexpr int gSphereResolution = 30;
+constexpr int gSphereResolution = 4;
 constexpr float gSphereDiameter = 1.0f;
 
 Queue *pGraphicsQueue = NULL;
@@ -96,6 +96,20 @@ class App : public IApp {
     shaderDesc.mStages[0] = {"basic.vert", NULL, 0};
     shaderDesc.mStages[1] = {"basic.frag", NULL, 0};
 
+	float *pSpherePoints;
+	int gNumberOfSpherePoints;
+	generateSpherePoints(&pSpherePoints, &gNumberOfSpherePoints,
+		gSphereResolution, gSphereDiameter);
+
+	uint64_t sphereDataSize = gNumberOfSpherePoints * sizeof(float);
+	BufferLoadDesc sphereVbDesc = {};
+	sphereVbDesc.mDesc.mDescriptors = DESCRIPTOR_TYPE_VERTEX_BUFFER;
+	sphereVbDesc.mDesc.mMemoryUsage = RESOURCE_MEMORY_USAGE_GPU_ONLY;
+	sphereVbDesc.mDesc.mSize = sphereDataSize;
+	sphereVbDesc.pData = pSpherePoints;
+	sphereVbDesc.ppBuffer = &pVertexBuffer;
+	addResource(&sphereVbDesc, NULL);
+
     /*
 addShader(pRenderer, &shaderDesc, &pShader);
 
@@ -115,14 +129,7 @@ int gNumberOfSpherePoints;
 generateSpherePoints(&pSpherePoints, &gNumberOfSpherePoints,
                      gSphereResolution, gSphereDiameter);
 
-uint64_t sphereDataSize = gNumberOfSpherePoints * sizeof(float);
-BufferLoadDesc sphereVbDesc = {};
-sphereVbDesc.mDesc.mDescriptors = DESCRIPTOR_TYPE_VERTEX_BUFFER;
-sphereVbDesc.mDesc.mMemoryUsage = RESOURCE_MEMORY_USAGE_GPU_ONLY;
-sphereVbDesc.mDesc.mSize = sphereDataSize;
-sphereVbDesc.pData = pSpherePoints;
-sphereVbDesc.ppBuffer = &pVertexBuffer;
-addResource(&sphereVbDesc, NULL);
+
 
 BufferLoadDesc ubDesc = {};
 ubDesc.mDesc.mDescriptors = DESCRIPTOR_TYPE_UNIFORM_BUFFER;
@@ -186,7 +193,7 @@ for (uint32_t i = 0; i < gImageCount; ++i) {
     waitForAllResourceLoads();
 
     // Need to free memory;
-    // tf_free(pSpherePoints);
+    tf_free(pSpherePoints);
     /*
 for (uint32_t i = 0; i < gImageCount; ++i) {
   DescriptorData params[1] = {};
