@@ -145,8 +145,8 @@ class App : public IApp {
     gAppUI.LoadFont("TitilliumText/TitilliumText-Bold.otf");
 
     CameraMotionParameters cmp{160.0f, 600.0f, 200.0f};
-    vec3 camPos{48.0f, 48.0f, 20.0f};
-    vec3 lookAt{vec3(0)};
+    vec3 lookAt{0.0f, 0.0f, 1000.0f};
+    vec3 camPos{vec3(0)}; 
 
     pCameraController = createFpsCameraController(camPos, lookAt);
 
@@ -366,7 +366,7 @@ class App : public IApp {
 
     spherePos.setZ(spherePos.getZ() - deltaTime * speed);
     if (spherePos.getZ() < 0) {
-      spherePos.setZ(-1000);
+      spherePos.setZ(1000);
     }
     /************************************************************************/
     // Scene Update
