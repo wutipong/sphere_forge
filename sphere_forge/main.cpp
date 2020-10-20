@@ -96,44 +96,45 @@ class App : public IApp {
     shaderDesc.mStages[0] = {"basic.vert", NULL, 0};
     shaderDesc.mStages[1] = {"basic.frag", NULL, 0};
 
-    addShader(pRenderer, &shaderDesc, &pShader);
+    /*
+addShader(pRenderer, &shaderDesc, &pShader);
 
-    Shader *shaders[] = {pShader};
-    RootSignatureDesc rootDesc = {};
-    rootDesc.mStaticSamplerCount = 0;
-    rootDesc.mShaderCount = 1;
-    rootDesc.ppShaders = shaders;
-    addRootSignature(pRenderer, &rootDesc, &pRootSignature);
+Shader *shaders[] = {pShader};
+RootSignatureDesc rootDesc = {};
+rootDesc.mStaticSamplerCount = 0;
+rootDesc.mShaderCount = 1;
+rootDesc.ppShaders = shaders;
+addRootSignature(pRenderer, &rootDesc, &pRootSignature);
 
-    DescriptorSetDesc desc = {pRootSignature, DESCRIPTOR_UPDATE_FREQ_PER_FRAME,
-                              gImageCount * 2};
-    addDescriptorSet(pRenderer, &desc, &pDescriptorSetUniforms);
+DescriptorSetDesc desc = {pRootSignature, DESCRIPTOR_UPDATE_FREQ_PER_FRAME,
+                          gImageCount * 2};
+addDescriptorSet(pRenderer, &desc, &pDescriptorSetUniforms);
 
-    float *pSpherePoints;
-    int gNumberOfSpherePoints;
-    generateSpherePoints(&pSpherePoints, &gNumberOfSpherePoints,
-                         gSphereResolution, gSphereDiameter);
+float *pSpherePoints;
+int gNumberOfSpherePoints;
+generateSpherePoints(&pSpherePoints, &gNumberOfSpherePoints,
+                     gSphereResolution, gSphereDiameter);
 
-    uint64_t sphereDataSize = gNumberOfSpherePoints * sizeof(float);
-    BufferLoadDesc sphereVbDesc = {};
-    sphereVbDesc.mDesc.mDescriptors = DESCRIPTOR_TYPE_VERTEX_BUFFER;
-    sphereVbDesc.mDesc.mMemoryUsage = RESOURCE_MEMORY_USAGE_GPU_ONLY;
-    sphereVbDesc.mDesc.mSize = sphereDataSize;
-    sphereVbDesc.pData = pSpherePoints;
-    sphereVbDesc.ppBuffer = &pVertexBuffer;
-    addResource(&sphereVbDesc, NULL);
+uint64_t sphereDataSize = gNumberOfSpherePoints * sizeof(float);
+BufferLoadDesc sphereVbDesc = {};
+sphereVbDesc.mDesc.mDescriptors = DESCRIPTOR_TYPE_VERTEX_BUFFER;
+sphereVbDesc.mDesc.mMemoryUsage = RESOURCE_MEMORY_USAGE_GPU_ONLY;
+sphereVbDesc.mDesc.mSize = sphereDataSize;
+sphereVbDesc.pData = pSpherePoints;
+sphereVbDesc.ppBuffer = &pVertexBuffer;
+addResource(&sphereVbDesc, NULL);
 
-    BufferLoadDesc ubDesc = {};
-    ubDesc.mDesc.mDescriptors = DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-    ubDesc.mDesc.mMemoryUsage = RESOURCE_MEMORY_USAGE_CPU_TO_GPU;
-    ubDesc.mDesc.mSize = sizeof(UniformBlock);
-    ubDesc.mDesc.mFlags = BUFFER_CREATION_FLAG_PERSISTENT_MAP_BIT;
-    ubDesc.pData = NULL;
-    for (uint32_t i = 0; i < gImageCount; ++i) {
-      ubDesc.ppBuffer = &pProjViewUniformBuffer[i];
-      addResource(&ubDesc, NULL);
-    }
-
+BufferLoadDesc ubDesc = {};
+ubDesc.mDesc.mDescriptors = DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+ubDesc.mDesc.mMemoryUsage = RESOURCE_MEMORY_USAGE_CPU_TO_GPU;
+ubDesc.mDesc.mSize = sizeof(UniformBlock);
+ubDesc.mDesc.mFlags = BUFFER_CREATION_FLAG_PERSISTENT_MAP_BIT;
+ubDesc.pData = NULL;
+for (uint32_t i = 0; i < gImageCount; ++i) {
+  ubDesc.ppBuffer = &pProjViewUniformBuffer[i];
+  addResource(&ubDesc, NULL);
+}
+    */
     if (!gAppUI.Init(pRenderer))
       return false;
 
@@ -167,16 +168,16 @@ class App : public IApp {
     waitForAllResourceLoads();
 
     // Need to free memory;
-    tf_free(pSpherePoints);
-
-    for (uint32_t i = 0; i < gImageCount; ++i) {
-      DescriptorData params[1] = {};
-      params[0].pName = "uniformBlock";
-      params[0].ppBuffers = &pProjViewUniformBuffer[i];
-      updateDescriptorSet(pRenderer, i * 2 + 1, pDescriptorSetUniforms, 1,
-                          params);
-    }
-
+    // tf_free(pSpherePoints);
+    /*
+for (uint32_t i = 0; i < gImageCount; ++i) {
+  DescriptorData params[1] = {};
+  params[0].pName = "uniformBlock";
+  params[0].ppBuffers = &pProjViewUniformBuffer[i];
+  updateDescriptorSet(pRenderer, i * 2 + 1, pDescriptorSetUniforms, 1,
+                      params);
+}
+    */
     return true;
   }
 
@@ -218,39 +219,37 @@ class App : public IApp {
     removeRenderer(pRenderer);
   }
 
-  bool addSwapChain()
-  {
-	  SwapChainDesc swapChainDesc = {};
-	  swapChainDesc.mWindowHandle = pWindow->handle;
-	  swapChainDesc.mPresentQueueCount = 1;
-	  swapChainDesc.ppPresentQueues = &pGraphicsQueue;
-	  swapChainDesc.mWidth = mSettings.mWidth;
-	  swapChainDesc.mHeight = mSettings.mHeight;
-	  swapChainDesc.mImageCount = gImageCount;
-	  swapChainDesc.mColorFormat = getRecommendedSwapchainFormat(true);
-	  swapChainDesc.mEnableVsync = mSettings.mDefaultVSyncEnabled;
-	  ::addSwapChain(pRenderer, &swapChainDesc, &pSwapChain);
+  bool addSwapChain() {
+    SwapChainDesc swapChainDesc = {};
+    swapChainDesc.mWindowHandle = pWindow->handle;
+    swapChainDesc.mPresentQueueCount = 1;
+    swapChainDesc.ppPresentQueues = &pGraphicsQueue;
+    swapChainDesc.mWidth = mSettings.mWidth;
+    swapChainDesc.mHeight = mSettings.mHeight;
+    swapChainDesc.mImageCount = gImageCount;
+    swapChainDesc.mColorFormat = getRecommendedSwapchainFormat(true);
+    swapChainDesc.mEnableVsync = mSettings.mDefaultVSyncEnabled;
+    ::addSwapChain(pRenderer, &swapChainDesc, &pSwapChain);
 
-	  return pSwapChain != NULL;
+    return pSwapChain != NULL;
   }
 
-  bool addDepthBuffer()
-  {
-	  // Add depth buffer
-	  RenderTargetDesc depthRT = {};
-	  depthRT.mArraySize = 1;
-	  depthRT.mClearValue.depth = 0.0f;
-	  depthRT.mClearValue.stencil = 0;
-	  depthRT.mDepth = 1;
-	  depthRT.mFormat = TinyImageFormat_D32_SFLOAT;
-	  depthRT.mHeight = mSettings.mHeight;
-	  depthRT.mSampleCount = SAMPLE_COUNT_1;
-	  depthRT.mSampleQuality = 0;
-	  depthRT.mWidth = mSettings.mWidth;
-	  depthRT.mFlags = TEXTURE_CREATION_FLAG_ON_TILE;
-	  addRenderTarget(pRenderer, &depthRT, &pDepthBuffer);
+  bool addDepthBuffer() {
+    // Add depth buffer
+    RenderTargetDesc depthRT = {};
+    depthRT.mArraySize = 1;
+    depthRT.mClearValue.depth = 0.0f;
+    depthRT.mClearValue.stencil = 0;
+    depthRT.mDepth = 1;
+    depthRT.mFormat = TinyImageFormat_D32_SFLOAT;
+    depthRT.mHeight = mSettings.mHeight;
+    depthRT.mSampleCount = SAMPLE_COUNT_1;
+    depthRT.mSampleQuality = 0;
+    depthRT.mWidth = mSettings.mWidth;
+    depthRT.mFlags = TEXTURE_CREATION_FLAG_ON_TILE;
+    addRenderTarget(pRenderer, &depthRT, &pDepthBuffer);
 
-	  return pDepthBuffer != NULL;
+    return pDepthBuffer != NULL;
   }
 
   virtual bool Load() override {
@@ -264,218 +263,219 @@ class App : public IApp {
       return false;
 
     loadProfilerUI(&gAppUI, mSettings.mWidth, mSettings.mHeight);
+    /*
+// layout and pipeline for sphere draw
+VertexLayout vertexLayout = {};
+vertexLayout.mAttribCount = 2;
+vertexLayout.mAttribs[0].mSemantic = SEMANTIC_POSITION;
+vertexLayout.mAttribs[0].mFormat = TinyImageFormat_R32G32B32_SFLOAT;
+vertexLayout.mAttribs[0].mBinding = 0;
+vertexLayout.mAttribs[0].mLocation = 0;
+vertexLayout.mAttribs[0].mOffset = 0;
+vertexLayout.mAttribs[1].mSemantic = SEMANTIC_NORMAL;
+vertexLayout.mAttribs[1].mFormat = TinyImageFormat_R32G32B32_SFLOAT;
+vertexLayout.mAttribs[1].mBinding = 0;
+vertexLayout.mAttribs[1].mLocation = 1;
+vertexLayout.mAttribs[1].mOffset = 3 * sizeof(float);
 
-    // layout and pipeline for sphere draw
-    VertexLayout vertexLayout = {};
-    vertexLayout.mAttribCount = 2;
-    vertexLayout.mAttribs[0].mSemantic = SEMANTIC_POSITION;
-    vertexLayout.mAttribs[0].mFormat = TinyImageFormat_R32G32B32_SFLOAT;
-    vertexLayout.mAttribs[0].mBinding = 0;
-    vertexLayout.mAttribs[0].mLocation = 0;
-    vertexLayout.mAttribs[0].mOffset = 0;
-    vertexLayout.mAttribs[1].mSemantic = SEMANTIC_NORMAL;
-    vertexLayout.mAttribs[1].mFormat = TinyImageFormat_R32G32B32_SFLOAT;
-    vertexLayout.mAttribs[1].mBinding = 0;
-    vertexLayout.mAttribs[1].mLocation = 1;
-    vertexLayout.mAttribs[1].mOffset = 3 * sizeof(float);
+RasterizerStateDesc rasterizerStateDesc = {};
+rasterizerStateDesc.mCullMode = CULL_MODE_NONE;
 
-    RasterizerStateDesc rasterizerStateDesc = {};
-    rasterizerStateDesc.mCullMode = CULL_MODE_NONE;
+RasterizerStateDesc sphereRasterizerStateDesc = {};
+sphereRasterizerStateDesc.mCullMode = CULL_MODE_FRONT;
 
-    RasterizerStateDesc sphereRasterizerStateDesc = {};
-    sphereRasterizerStateDesc.mCullMode = CULL_MODE_FRONT;
+DepthStateDesc depthStateDesc = {};
+depthStateDesc.mDepthTest = true;
+depthStateDesc.mDepthWrite = true;
+depthStateDesc.mDepthFunc = CMP_GEQUAL;
 
-    DepthStateDesc depthStateDesc = {};
-    depthStateDesc.mDepthTest = true;
-    depthStateDesc.mDepthWrite = true;
-    depthStateDesc.mDepthFunc = CMP_GEQUAL;
-
-    PipelineDesc desc = {};
-    desc.mType = PIPELINE_TYPE_GRAPHICS;
-    GraphicsPipelineDesc &pipelineSettings = desc.mGraphicsDesc;
-    pipelineSettings.mPrimitiveTopo = PRIMITIVE_TOPO_TRI_LIST;
-    pipelineSettings.mRenderTargetCount = 1;
-    pipelineSettings.pDepthState = &depthStateDesc;
-    pipelineSettings.pColorFormats = &pSwapChain->ppRenderTargets[0]->mFormat;
-    pipelineSettings.mSampleCount =
-        pSwapChain->ppRenderTargets[0]->mSampleCount;
-    pipelineSettings.mSampleQuality =
-        pSwapChain->ppRenderTargets[0]->mSampleQuality;
-    pipelineSettings.mDepthStencilFormat = pDepthBuffer->mFormat;
-    pipelineSettings.pRootSignature = pRootSignature;
-    pipelineSettings.pShaderProgram = pShader;
-    pipelineSettings.pVertexLayout = &vertexLayout;
-    pipelineSettings.pRasterizerState = &sphereRasterizerStateDesc;
-    addPipeline(pRenderer, &desc, &pPipeline);
-
+PipelineDesc desc = {};
+desc.mType = PIPELINE_TYPE_GRAPHICS;
+GraphicsPipelineDesc &pipelineSettings = desc.mGraphicsDesc;
+pipelineSettings.mPrimitiveTopo = PRIMITIVE_TOPO_TRI_LIST;
+pipelineSettings.mRenderTargetCount = 1;
+pipelineSettings.pDepthState = &depthStateDesc;
+pipelineSettings.pColorFormats = &pSwapChain->ppRenderTargets[0]->mFormat;
+pipelineSettings.mSampleCount =
+    pSwapChain->ppRenderTargets[0]->mSampleCount;
+pipelineSettings.mSampleQuality =
+    pSwapChain->ppRenderTargets[0]->mSampleQuality;
+pipelineSettings.mDepthStencilFormat = pDepthBuffer->mFormat;
+pipelineSettings.pRootSignature = pRootSignature;
+pipelineSettings.pShaderProgram = pShader;
+pipelineSettings.pVertexLayout = &vertexLayout;
+pipelineSettings.pRasterizerState = &sphereRasterizerStateDesc;
+addPipeline(pRenderer, &desc, &pPipeline);
+    */
     return true;
   }
   virtual void Unload() override {
-	  waitQueueIdle(pGraphicsQueue);
+    waitQueueIdle(pGraphicsQueue);
 
-	  unloadProfilerUI();
-	  gAppUI.Unload();
+    unloadProfilerUI();
+    gAppUI.Unload();
 
-	  removePipeline(pRenderer, pPipeline);
-	  removeSwapChain(pRenderer, pSwapChain);
-	  removeRenderTarget(pRenderer, pDepthBuffer);
+    // removePipeline(pRenderer, pPipeline);
+    removeSwapChain(pRenderer, pSwapChain);
+    removeRenderTarget(pRenderer, pDepthBuffer);
   }
 
   virtual void Update(float deltaTime) override {
-	  if (pSwapChain->mEnableVsync != bToggleVSync)
-	  {
-		  waitQueueIdle(pGraphicsQueue);
-		  gFrameIndex = 0;
-		  ::toggleVSync(pRenderer, &pSwapChain);
-	  }
+    if (pSwapChain->mEnableVsync != bToggleVSync) {
+      waitQueueIdle(pGraphicsQueue);
+      gFrameIndex = 0;
+      ::toggleVSync(pRenderer, &pSwapChain);
+    }
 
-	  updateInputSystem(mSettings.mWidth, mSettings.mHeight);
+    updateInputSystem(mSettings.mWidth, mSettings.mHeight);
 
-	  pCameraController->update(deltaTime);
-	  /************************************************************************/
-	  // Scene Update
-	  /************************************************************************/
-	  static float currentTime = 0.0f;
-	  currentTime += deltaTime * 1000.0f;
+    pCameraController->update(deltaTime);
+    /************************************************************************/
+    // Scene Update
+    /************************************************************************/
+    static float currentTime = 0.0f;
+    currentTime += deltaTime * 1000.0f;
 
-	  // update camera with time
-	  mat4 viewMat = pCameraController->getViewMatrix();
+    // update camera with time
+    mat4 viewMat = pCameraController->getViewMatrix();
 
-	  const float aspectInverse = (float)mSettings.mHeight / (float)mSettings.mWidth;
-	  const float horizontal_fov = PI / 2.0f;
-	  mat4        projMat = mat4::perspective(horizontal_fov, aspectInverse, 1000.0f, 0.1f);
-	  //gUniformData.mProjectView = projMat * viewMat;
+    /*const float aspectInverse =
+        (float)mSettings.mHeight / (float)mSettings.mWidth;
+    const float horizontal_fov = PI / 2.0f;
+    mat4 projMat =
+        mat4::perspective(horizontal_fov, aspectInverse, 1000.0f, 0.1f);
+    gUniformData.mProjectView = projMat * viewMat;
 
-	  // point light parameters
-	  //gUniformData.mLightPosition = vec3(0, 0, 0);
-	  //gUniformData.mLightColor = vec3(0.9f, 0.9f, 0.7f);    // Pale Yellow
+    point light parameters
+    gUniformData.mLightPosition = vec3(0, 0, 0);
+    gUniformData.mLightColor = vec3(0.9f, 0.9f, 0.7f);    // Pale Yellow
 
-	
-	  viewMat.setTranslation(vec3(0));
-	  //gUniformDataSky = gUniformData;
-	  //gUniformDataSky.mProjectView = projMat * viewMat;
+    viewMat.setTranslation(vec3(0));
+    gUniformDataSky = gUniformData;
+    gUniformDataSky.mProjectView = projMat * viewMat; */
 
-	  /************************************************************************/
-	  // Update GUI
-	  /************************************************************************/
-	  gAppUI.Update(deltaTime);
+    gAppUI.Update(deltaTime);
   }
   virtual void Draw() override {
-	  uint32_t swapchainImageIndex;
-	  acquireNextImage(pRenderer, pSwapChain, pImageAcquiredSemaphore, NULL, &swapchainImageIndex);
+    uint32_t swapchainImageIndex;
+    acquireNextImage(pRenderer, pSwapChain, pImageAcquiredSemaphore, NULL,
+                     &swapchainImageIndex);
 
-	  RenderTarget* pRenderTarget = pSwapChain->ppRenderTargets[swapchainImageIndex];
-	  Semaphore*    pRenderCompleteSemaphore = pRenderCompleteSemaphores[gFrameIndex];
-	  Fence*        pRenderCompleteFence = pRenderCompleteFences[gFrameIndex];
+    RenderTarget *pRenderTarget =
+        pSwapChain->ppRenderTargets[swapchainImageIndex];
+    Semaphore *pRenderCompleteSemaphore =
+        pRenderCompleteSemaphores[gFrameIndex];
+    Fence *pRenderCompleteFence = pRenderCompleteFences[gFrameIndex];
 
-	  // Stall if CPU is running "Swap Chain Buffer Count" frames ahead of GPU
-	  FenceStatus fenceStatus;
-	  getFenceStatus(pRenderer, pRenderCompleteFence, &fenceStatus);
-	  if (fenceStatus == FENCE_STATUS_INCOMPLETE)
-		  waitForFences(pRenderer, 1, &pRenderCompleteFence);
-	  /*
-	  // Update uniform buffers
-	  BufferUpdateDesc viewProjCbv = { pProjViewUniformBuffer[gFrameIndex] };
-	  beginUpdateResource(&viewProjCbv);
-	  *(UniformBlock*)viewProjCbv.pMappedData = gUniformData;
-	  endUpdateResource(&viewProjCbv, NULL);
+    // Stall if CPU is running "Swap Chain Buffer Count" frames ahead of GPU
+    FenceStatus fenceStatus;
+    getFenceStatus(pRenderer, pRenderCompleteFence, &fenceStatus);
+    if (fenceStatus == FENCE_STATUS_INCOMPLETE)
+      waitForFences(pRenderer, 1, &pRenderCompleteFence);
+    /*
+    // Update uniform buffers
+    BufferUpdateDesc viewProjCbv = { pProjViewUniformBuffer[gFrameIndex] };
+    beginUpdateResource(&viewProjCbv);
+    *(UniformBlock*)viewProjCbv.pMappedData = gUniformData;
+    endUpdateResource(&viewProjCbv, NULL);
 
-	  BufferUpdateDesc skyboxViewProjCbv = { pSkyboxUniformBuffer[gFrameIndex] };
-	  beginUpdateResource(&skyboxViewProjCbv);
-	  *(UniformBlock*)skyboxViewProjCbv.pMappedData = gUniformDataSky;
-	  endUpdateResource(&skyboxViewProjCbv, NULL);
-	  */
-	  // Reset cmd pool for this frame
-	  resetCmdPool(pRenderer, pCmdPools[gFrameIndex]);
+    BufferUpdateDesc skyboxViewProjCbv = { pSkyboxUniformBuffer[gFrameIndex] };
+    beginUpdateResource(&skyboxViewProjCbv);
+    *(UniformBlock*)skyboxViewProjCbv.pMappedData = gUniformDataSky;
+    endUpdateResource(&skyboxViewProjCbv, NULL);
+    */
+    // Reset cmd pool for this frame
+    resetCmdPool(pRenderer, pCmdPools[gFrameIndex]);
 
-	  Cmd* cmd = pCmds[gFrameIndex];
-	  beginCmd(cmd);
+    Cmd *cmd = pCmds[gFrameIndex];
+    beginCmd(cmd);
 
-	  cmdBeginGpuFrameProfile(cmd, gGpuProfileToken);
+    cmdBeginGpuFrameProfile(cmd, gGpuProfileToken);
 
-	  RenderTargetBarrier barriers[] = {
-		  { pRenderTarget, RESOURCE_STATE_RENDER_TARGET },
-		  { pDepthBuffer, RESOURCE_STATE_DEPTH_WRITE },
-	  };
-	  cmdResourceBarrier(cmd, 0, NULL, 0, NULL, 2, barriers);
+    RenderTargetBarrier barriers[] = {
+        {pRenderTarget, RESOURCE_STATE_PRESENT, RESOURCE_STATE_RENDER_TARGET},
+    };
+    cmdResourceBarrier(cmd, 0, NULL, 0, NULL, 1, barriers);
 
-	  // simply record the screen cleaning command
-	  LoadActionsDesc loadActions = {};
-	  loadActions.mLoadActionsColor[0] = LOAD_ACTION_CLEAR;
-	  loadActions.mLoadActionDepth = LOAD_ACTION_CLEAR;
-	  loadActions.mClearDepth.depth = 0.0f;
-	  loadActions.mClearDepth.stencil = 0;
-	  cmdBindRenderTargets(cmd, 1, &pRenderTarget, pDepthBuffer, &loadActions, NULL, NULL, -1, -1);
-	  cmdSetViewport(cmd, 0.0f, 0.0f, (float)pRenderTarget->mWidth, (float)pRenderTarget->mHeight, 0.0f, 1.0f);
-	  cmdSetScissor(cmd, 0, 0, pRenderTarget->mWidth, pRenderTarget->mHeight);
+    // simply record the screen cleaning command
+    LoadActionsDesc loadActions = {};
+    loadActions.mLoadActionsColor[0] = LOAD_ACTION_CLEAR;
+    loadActions.mLoadActionDepth = LOAD_ACTION_CLEAR;
+    loadActions.mClearDepth.depth = 0.0f;
+    loadActions.mClearDepth.stencil = 0;
+    cmdBindRenderTargets(cmd, 1, &pRenderTarget, pDepthBuffer, &loadActions,
+                         NULL, NULL, -1, -1);
+    cmdSetViewport(cmd, 0.0f, 0.0f, (float)pRenderTarget->mWidth,
+                   (float)pRenderTarget->mHeight, 0.0f, 1.0f);
+    cmdSetScissor(cmd, 0, 0, pRenderTarget->mWidth, pRenderTarget->mHeight);
 
-	  const uint32_t sphereVbStride = sizeof(float) * 6;
-	  const uint32_t skyboxVbStride = sizeof(float) * 4;
+    const uint32_t sphereVbStride = sizeof(float) * 6;
+    const uint32_t skyboxVbStride = sizeof(float) * 4;
 
-	  /*
-	  // draw skybox
-	  cmdBeginGpuTimestampQuery(cmd, gGpuProfileToken, "Draw Skybox");
-	  cmdBindPipeline(cmd, pSkyBoxDrawPipeline);
-	  cmdBindDescriptorSet(cmd, 0, pDescriptorSetTexture);
-	  cmdBindDescriptorSet(cmd, gFrameIndex * 2 + 0, pDescriptorSetUniforms);
-	  cmdBindVertexBuffer(cmd, 1, &pSkyBoxVertexBuffer, &skyboxVbStride, NULL);
-	  cmdDraw(cmd, 36, 0);
-	  cmdEndGpuTimestampQuery(cmd, gGpuProfileToken);
+    /*
+    // draw skybox
+    cmdBeginGpuTimestampQuery(cmd, gGpuProfileToken, "Draw Skybox");
+    cmdBindPipeline(cmd, pSkyBoxDrawPipeline);
+    cmdBindDescriptorSet(cmd, 0, pDescriptorSetTexture);
+    cmdBindDescriptorSet(cmd, gFrameIndex * 2 + 0, pDescriptorSetUniforms);
+    cmdBindVertexBuffer(cmd, 1, &pSkyBoxVertexBuffer, &skyboxVbStride, NULL);
+    cmdDraw(cmd, 36, 0);
+    cmdEndGpuTimestampQuery(cmd, gGpuProfileToken);
 
-	  ////// draw planets
-	 
-	  cmdBeginGpuTimestampQuery(cmd, gGpuProfileToken, "Draw Planets");
-	  cmdBindPipeline(cmd, pSpherePipeline);
-	  cmdBindDescriptorSet(cmd, gFrameIndex * 2 + 1, pDescriptorSetUniforms);
-	  cmdBindVertexBuffer(cmd, 1, &pSphereVertexBuffer, &sphereVbStride, NULL);
-	  cmdDrawInstanced(cmd, gNumberOfSpherePoints / 6, 0, gNumPlanets, 0);
-	  cmdEndGpuTimestampQuery(cmd, gGpuProfileToken);
-	  */
+    ////// draw planets
 
-	  loadActions = {};
-	  loadActions.mLoadActionsColor[0] = LOAD_ACTION_LOAD;
-	  cmdBindRenderTargets(cmd, 1, &pRenderTarget, NULL, &loadActions, NULL, NULL, -1, -1);
-	  cmdBeginGpuTimestampQuery(cmd, gGpuProfileToken, "Draw UI");
+    cmdBeginGpuTimestampQuery(cmd, gGpuProfileToken, "Draw Planets");
+    cmdBindPipeline(cmd, pSpherePipeline);
+    cmdBindDescriptorSet(cmd, gFrameIndex * 2 + 1, pDescriptorSetUniforms);
+    cmdBindVertexBuffer(cmd, 1, &pSphereVertexBuffer, &sphereVbStride, NULL);
+    cmdDrawInstanced(cmd, gNumberOfSpherePoints / 6, 0, gNumPlanets, 0);
+    cmdEndGpuTimestampQuery(cmd, gGpuProfileToken);
+    */
 
+    loadActions = {};
+    loadActions.mLoadActionsColor[0] = LOAD_ACTION_LOAD;
+    cmdBindRenderTargets(cmd, 1, &pRenderTarget, NULL, &loadActions, NULL, NULL,
+                         -1, -1);
+    cmdBeginGpuTimestampQuery(cmd, gGpuProfileToken, "Draw UI");
 
-	  const float txtIndent = 8.f;
-	  float2 txtSizePx = cmdDrawCpuProfile(cmd, float2(txtIndent, 15.f), &gFrameTimeDraw);
-	  cmdDrawGpuProfile(cmd, float2(txtIndent, txtSizePx.y + 30.f), gGpuProfileToken, &gFrameTimeDraw);
+    const float txtIndent = 8.f;
+    float2 txtSizePx =
+        cmdDrawCpuProfile(cmd, float2(txtIndent, 15.f), &gFrameTimeDraw);
+    cmdDrawGpuProfile(cmd, float2(txtIndent, txtSizePx.y + 30.f),
+                      gGpuProfileToken, &gFrameTimeDraw);
 
+    cmdDrawProfilerUI();
 
+    gAppUI.Gui(pGuiWindow);
+    gAppUI.Draw(cmd);
+    cmdBindRenderTargets(cmd, 0, NULL, NULL, NULL, NULL, NULL, -1, -1);
+    cmdEndGpuTimestampQuery(cmd, gGpuProfileToken);
 
-	  cmdDrawProfilerUI();
+    barriers[0] = {pRenderTarget, RESOURCE_STATE_RENDER_TARGET, RESOURCE_STATE_PRESENT};
+    cmdResourceBarrier(cmd, 0, NULL, 0, NULL, 1, barriers);
 
-	  gAppUI.Gui(pGuiWindow);
-	  gAppUI.Draw(cmd);
-	  cmdBindRenderTargets(cmd, 0, NULL, NULL, NULL, NULL, NULL, -1, -1);
-	  cmdEndGpuTimestampQuery(cmd, gGpuProfileToken);
+    cmdEndGpuFrameProfile(cmd, gGpuProfileToken);
+    endCmd(cmd);
 
-	  barriers[0] = { pRenderTarget, RESOURCE_STATE_PRESENT };
-	  cmdResourceBarrier(cmd, 0, NULL, 0, NULL, 1, barriers);
+    QueueSubmitDesc submitDesc = {};
+    submitDesc.mCmdCount = 1;
+    submitDesc.mSignalSemaphoreCount = 1;
+    submitDesc.mWaitSemaphoreCount = 1;
+    submitDesc.ppCmds = &cmd;
+    submitDesc.ppSignalSemaphores = &pRenderCompleteSemaphore;
+    submitDesc.ppWaitSemaphores = &pImageAcquiredSemaphore;
+    submitDesc.pSignalFence = pRenderCompleteFence;
+    queueSubmit(pGraphicsQueue, &submitDesc);
+    QueuePresentDesc presentDesc = {};
+    presentDesc.mIndex = swapchainImageIndex;
+    presentDesc.mWaitSemaphoreCount = 1;
+    presentDesc.pSwapChain = pSwapChain;
+    presentDesc.ppWaitSemaphores = &pRenderCompleteSemaphore;
+    presentDesc.mSubmitDone = true;
+    queuePresent(pGraphicsQueue, &presentDesc);
+    flipProfiler();
 
-	  cmdEndGpuFrameProfile(cmd, gGpuProfileToken);
-	  endCmd(cmd);
-
-	  QueueSubmitDesc submitDesc = {};
-	  submitDesc.mCmdCount = 1;
-	  submitDesc.mSignalSemaphoreCount = 1;
-	  submitDesc.mWaitSemaphoreCount = 1;
-	  submitDesc.ppCmds = &cmd;
-	  submitDesc.ppSignalSemaphores = &pRenderCompleteSemaphore;
-	  submitDesc.ppWaitSemaphores = &pImageAcquiredSemaphore;
-	  submitDesc.pSignalFence = pRenderCompleteFence;
-	  queueSubmit(pGraphicsQueue, &submitDesc);
-	  QueuePresentDesc presentDesc = {};
-	  presentDesc.mIndex = swapchainImageIndex;
-	  presentDesc.mWaitSemaphoreCount = 1;
-	  presentDesc.pSwapChain = pSwapChain;
-	  presentDesc.ppWaitSemaphores = &pRenderCompleteSemaphore;
-	  presentDesc.mSubmitDone = true;
-	  queuePresent(pGraphicsQueue, &presentDesc);
-	  flipProfiler();
-
-	  gFrameIndex = (gFrameIndex + 1) % gImageCount;
+    gFrameIndex = (gFrameIndex + 1) % gImageCount;
   }
 
   virtual const char *GetName() override { return "Sphere Test"; }
