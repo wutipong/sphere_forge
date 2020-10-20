@@ -20,7 +20,7 @@ struct UniformBlock {
 Renderer *pRenderer = NULL;
 constexpr size_t gImageCount = 3;
 
-constexpr int gSphereResolution = 4;
+constexpr int gSphereResolution = 10;
 constexpr float gSphereDiameter = 1.0f;
 
 Queue *pGraphicsQueue = NULL;
