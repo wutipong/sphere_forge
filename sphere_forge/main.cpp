@@ -165,6 +165,24 @@ for (uint32_t i = 0; i < gImageCount; ++i) {
     pGuiWindow->AddWidget(
         CheckboxWidget("Toggle VSync\t\t\t\t\t", &bToggleVSync));
 
+	// App Actions
+	InputActionDesc actionDesc = { InputBindings::BUTTON_DUMP, [](InputActionContext* ctx) {  dumpProfileData(((Renderer*)ctx->pUserData), ((Renderer*)ctx->pUserData)->pName); return true; }, pRenderer };
+	addInputAction(&actionDesc);
+	actionDesc = { InputBindings::BUTTON_FULLSCREEN, [](InputActionContext* ctx) { toggleFullscreen(((IApp*)ctx->pUserData)->pWindow); return true; }, this };
+	addInputAction(&actionDesc);
+	actionDesc = { InputBindings::BUTTON_EXIT, [](InputActionContext* ctx) { requestShutdown(); return true; } };
+	addInputAction(&actionDesc);
+	actionDesc =
+	{
+		InputBindings::BUTTON_ANY, [](InputActionContext* ctx)
+		{
+			bool capture = gAppUI.OnButton(ctx->mBinding, ctx->mBool, ctx->pPosition);
+			setEnableCaptureInput(capture && INPUT_ACTION_PHASE_CANCELED != ctx->mPhase);
+			return true;
+		}, this
+	};
+	addInputAction(&actionDesc);
+
     waitForAllResourceLoads();
 
     // Need to free memory;
