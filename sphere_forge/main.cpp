@@ -48,7 +48,12 @@ GuiComponent *pGuiWindow;
 UIApp gAppUI;
 
 RootSignature *pRootSignature = NULL;
+
+constexpr size_t sphereCount = 10000;
+
 DescriptorSet *pDescriptorSetUniforms = {NULL};
+vec4 spherePos[sphereCount];
+UniformBlock gUniformData[sphereCount] = {};
 
 ICameraController *pCameraController = {};
 
@@ -56,10 +61,7 @@ bool bToggleVSync = false;
 
 TextDrawDesc gFrameTimeDraw = TextDrawDesc(0, 0xff00ffff, 18);
 
-vec4 spherePos = {0, 0, 0, 0};
 constexpr float speed = 500.0f;
-
-UniformBlock gUniformData = {};
 
 int gNumberOfSpherePoints;
 
@@ -147,10 +149,12 @@ class App : public IApp {
 
     DescriptorSetDesc desc = {pRootSignature, DESCRIPTOR_UPDATE_FREQ_PER_FRAME,
                               gImageCount};
+ 
     addDescriptorSet(pRenderer, &desc, &pDescriptorSetUniforms);
-
+    
     for (uint32_t i = 0; i < gImageCount; ++i) {
-	  addUniformGPURingBuffer(pRenderer, 1024, &pProjViewUniformBuffer[i], true);
+      addUniformGPURingBuffer(pRenderer, 4*1024*1024, &pProjViewUniformBuffer[i],
+                              true);
     }
 
     if (!gAppUI.Init(pRenderer))
@@ -220,13 +224,13 @@ class App : public IApp {
 
     // Need to free memory;
     tf_free(pSpherePoints);
-	
-	auto size = sizeof(UniformBlock);
+
+    auto size = sizeof(UniformBlock);
     for (uint32_t i = 0; i < gImageCount; ++i) {
       DescriptorData params[1] = {};
       params[0].pName = "rootcbv";
       params[0].ppBuffers = &pProjViewUniformBuffer[i]->pBuffer;
-	  params[0].pSizes = &size;
+      params[0].pSizes = &size;
       updateDescriptorSet(pRenderer, i, pDescriptorSetUniforms, 1, params);
     }
 
@@ -246,10 +250,11 @@ class App : public IApp {
     exitProfiler();
 
     for (uint32_t i = 0; i < gImageCount; ++i) {
-	  removeGPURingBuffer(pProjViewUniformBuffer[i]);
+      removeGPURingBuffer(pProjViewUniformBuffer[i]);
     }
 
-    removeDescriptorSet(pRenderer, pDescriptorSetUniforms);
+	removeDescriptorSet(pRenderer, pDescriptorSetUniforms);
+	
 
     removeResource(pVertexBuffer);
 
@@ -380,11 +385,6 @@ class App : public IApp {
 
     pCameraController->update(deltaTime);
 
-    spherePos.setZ(spherePos.getZ() - deltaTime * speed);
-    if (spherePos.getZ() < 0) {
-      spherePos = RandomInsideUnitSphere() * 500.0f;
-      spherePos.setZ(spherePos.getZ() + 1000);
-    }
     /************************************************************************/
     // Scene Update
     /************************************************************************/
@@ -397,14 +397,24 @@ class App : public IApp {
 
     mat4 projMat =
         mat4::perspective(horizontal_fov, aspectInverse, 0.3f, 1000.0f);
-    gUniformData.mProjectView = projMat * viewMat;
-    gUniformData.mWorld =
-        mat4::translation({spherePos[0], spherePos[1], spherePos[2]});
-    gUniformData.mColor = {0.5f, 0.5f, 1.0f, 1.0f};
-    // point light parameters
-    gUniformData.mLightPosition = vec3(0, 0, 0);
-    gUniformData.mLightColor = vec3(0.9f, 0.9f, 0.7f); // Pale Yellow
+    auto projView = projMat * viewMat;
 
+    for (auto i = 0; i < sphereCount; i++) {
+
+      spherePos[i].setZ(spherePos[i].getZ() - deltaTime * speed);
+      if (spherePos[i].getZ() < 0) {
+        spherePos[i] = RandomInsideUnitSphere() * 500.0f;
+        spherePos[i].setZ(spherePos[i].getZ() + 1000);
+      }
+
+      gUniformData[i].mProjectView = projMat * viewMat;
+      gUniformData[i].mWorld = mat4::translation(
+          {spherePos[i].getX(), spherePos[i].getY(), spherePos[i].getZ()});
+      gUniformData[i].mColor = {0.5f, 0.5f, 1.0f, 1.0f};
+      // point light parameters
+      gUniformData[i].mLightPosition = vec3(0, 0, 0);
+      gUniformData[i].mLightColor = vec3(0.9f, 0.9f, 0.7f); // Pale Yellow
+    }
     gAppUI.Update(deltaTime);
   }
 
@@ -426,10 +436,14 @@ class App : public IApp {
       waitForFences(pRenderer, 1, &pRenderCompleteFence);
 
     // Update uniform buffers
-	GPURingBufferOffset offset = getGPURingBufferOffset(pProjViewUniformBuffer[gFrameIndex], sizeof(UniformBlock), 0);
-	BufferUpdateDesc viewProjCbv = { offset.pBuffer, offset.mOffset };
+    GPURingBufferOffset offset =
+        getGPURingBufferOffset(pProjViewUniformBuffer[gFrameIndex],
+                               sizeof(UniformBlock) * sphereCount, 0);
+    BufferUpdateDesc viewProjCbv = {offset.pBuffer, offset.mOffset};
     beginUpdateResource(&viewProjCbv);
-    *(UniformBlock *)viewProjCbv.pMappedData = gUniformData;
+    memcpy(viewProjCbv.pMappedData, gUniformData,
+           sizeof(UniformBlock) * sphereCount);
+    //*(UniformBlock *)viewProjCbv.pMappedData = gUniformData;
     endUpdateResource(&viewProjCbv, NULL);
 
     // Reset cmd pool for this frame
@@ -462,10 +476,14 @@ class App : public IApp {
 
     ////// draw planets
     cmdBeginGpuTimestampQuery(cmd, gGpuProfileToken, "Draw Spheres");
-    cmdBindPipeline(cmd, pPipeline);
-    cmdBindDescriptorSet(cmd, gFrameIndex, pDescriptorSetUniforms);
-    cmdBindVertexBuffer(cmd, 1, &pVertexBuffer, &sphereVbStride, NULL);
-    cmdDraw(cmd, gNumberOfSpherePoints / 6, 0);
+    {
+      for (auto i = 0; i < sphereCount; i++) {
+        cmdBindPipeline(cmd, pPipeline);
+        cmdBindDescriptorSet(cmd, gFrameIndex, pDescriptorSetUniforms);
+        cmdBindVertexBuffer(cmd, 1, &pVertexBuffer, &sphereVbStride, NULL);
+        cmdDraw(cmd, gNumberOfSpherePoints / 6, 0);
+      }
+    }
     cmdEndGpuTimestampQuery(cmd, gGpuProfileToken);
 
     loadActions = {};
@@ -473,24 +491,25 @@ class App : public IApp {
     cmdBindRenderTargets(cmd, 1, &pRenderTarget, NULL, &loadActions, NULL, NULL,
                          -1, -1);
     cmdBeginGpuTimestampQuery(cmd, gGpuProfileToken, "Draw UI");
+    {
 
-    const float txtIndent = 8.f;
-    float2 txtSizePx =
-        cmdDrawCpuProfile(cmd, float2(txtIndent, 15.f), &gFrameTimeDraw);
-    cmdDrawGpuProfile(cmd, float2(txtIndent, txtSizePx.y + 30.f),
-                      gGpuProfileToken, &gFrameTimeDraw);
+      const float txtIndent = 8.f;
+      float2 txtSizePx =
+          cmdDrawCpuProfile(cmd, float2(txtIndent, 15.f), &gFrameTimeDraw);
+      cmdDrawGpuProfile(cmd, float2(txtIndent, txtSizePx.y + 30.f),
+                        gGpuProfileToken, &gFrameTimeDraw);
 
-    cmdDrawProfilerUI();
+      cmdDrawProfilerUI();
 
-    gAppUI.Gui(pGuiWindow);
-    gAppUI.Draw(cmd);
-    cmdBindRenderTargets(cmd, 0, NULL, NULL, NULL, NULL, NULL, -1, -1);
-    cmdEndGpuTimestampQuery(cmd, gGpuProfileToken);
+      gAppUI.Gui(pGuiWindow);
+      gAppUI.Draw(cmd);
+      cmdBindRenderTargets(cmd, 0, NULL, NULL, NULL, NULL, NULL, -1, -1);
+      cmdEndGpuTimestampQuery(cmd, gGpuProfileToken);
 
-    barriers[0] = {pRenderTarget, RESOURCE_STATE_RENDER_TARGET,
-                   RESOURCE_STATE_PRESENT};
-    cmdResourceBarrier(cmd, 0, NULL, 0, NULL, 1, barriers);
-
+      barriers[0] = {pRenderTarget, RESOURCE_STATE_RENDER_TARGET,
+                     RESOURCE_STATE_PRESENT};
+      cmdResourceBarrier(cmd, 0, NULL, 0, NULL, 1, barriers);
+    }
     cmdEndGpuFrameProfile(cmd, gGpuProfileToken);
     endCmd(cmd);
 
