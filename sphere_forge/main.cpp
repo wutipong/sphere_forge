@@ -62,6 +62,26 @@ UniformBlock gUniformData = {};
 
 int gNumberOfSpherePoints;
 
+vec4 RandomInsideUnitSphere() {
+  auto r = []() {
+    constexpr int range = 100;
+    int value = rand() % range;
+
+    return (float)value / range;
+  };
+
+  float x, y, z, d;
+  do {
+    x = r() * 2.0f - 1.0f;
+    y = r() * 2.0f - 1.0f;
+    z = r() * 2.0f - 1.0f;
+
+    d = x * x + y * y + z * z;
+  } while (d > 1.0);
+
+  return {x, y, z, 1.0f};
+}
+
 class App : public IApp {
   virtual bool Init() {
     // FILE PATHS
@@ -146,7 +166,7 @@ class App : public IApp {
 
     CameraMotionParameters cmp{160.0f, 600.0f, 200.0f};
     vec3 lookAt{0.0f, 0.0f, 1000.0f};
-    vec3 camPos{vec3(0)}; 
+    vec3 camPos{vec3(0)};
 
     pCameraController = createFpsCameraController(camPos, lookAt);
 
@@ -366,7 +386,8 @@ class App : public IApp {
 
     spherePos.setZ(spherePos.getZ() - deltaTime * speed);
     if (spherePos.getZ() < 0) {
-      spherePos.setZ(1000);
+      spherePos = RandomInsideUnitSphere() * 500.0f;
+      spherePos.setZ(spherePos.getZ() + 1000);
     }
     /************************************************************************/
     // Scene Update
