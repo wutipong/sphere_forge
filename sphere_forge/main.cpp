@@ -50,6 +50,7 @@ constexpr size_t sphereCount = 10000;
 
 DescriptorSet *pDescriptorSetUniforms[sphereCount] = {NULL};
 vec4 spherePos[sphereCount];
+vec4 colors[sphereCount];
 UniformBlock gUniformData[sphereCount];
 Buffer *pProjViewUniformBuffer[gImageCount][sphereCount] = {NULL};
 
@@ -64,7 +65,6 @@ constexpr float speed = 500.0f;
 int gNumberOfSpherePoints;
 
 vec4 RandomInsideUnitSphere() {
-  PROFILER_SET_CPU_SCOPE("Spheres", "RandomInsideUnitSphere", 0xFFE8E8);
   auto r = []() {
     constexpr int range = 10000;
     int value = rand() % range;
@@ -84,8 +84,21 @@ vec4 RandomInsideUnitSphere() {
   return {x, y, z, 1.0f};
 }
 
+vec4 RandomColor() {
+	auto r = []() {
+		constexpr int range = 10000;
+		int value = rand() % range;
+
+		return (float)value / range;
+	};
+
+	return { r(), r(), r(), 1.0f };
+}
+
+
 class App : public IApp {
   virtual bool Init() {
+	  srand(time(NULL));
     // FILE PATHS
     fsSetPathForResourceDir(pSystemFileIO, RM_CONTENT, RD_SHADER_SOURCES,
                             "Shaders");
@@ -416,6 +429,7 @@ class App : public IApp {
         if (z < 0) {
           spherePos[i] = RandomInsideUnitSphere() * 500;
           z = spherePos[i].getZ() + 1000;
+		  colors[i] = RandomColor();
         } else {
           z -= deltaTime * speed;
         }
@@ -424,7 +438,7 @@ class App : public IApp {
         gUniformData[i].mProjectView = projMat * viewMat;
         gUniformData[i].mWorld = mat4::translation(
             {spherePos[i].getX(), spherePos[i].getY(), spherePos[i].getZ()});
-        gUniformData[i].mColor = {0.5f, 0.5f, 1.0f, 1.0f};
+		gUniformData[i].mColor = colors[i];
         // point light parameters
         gUniformData[i].mLightPosition = vec3(0, 0, 0);
         gUniformData[i].mLightColor = vec3(0.9f, 0.9f, 0.7f); // Pale Yellow
