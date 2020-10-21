@@ -184,8 +184,8 @@ class App : public IApp {
     gAppUI.LoadFont("TitilliumText/TitilliumText-Bold.otf");
 
     CameraMotionParameters cmp{160.0f, 600.0f, 200.0f};
-    vec3 lookAt{0.0f, 0.0f, 1000.0f};
-    vec3 camPos{vec3(0)};
+    vec3 lookAt{0,0,500};
+    vec3 camPos{ 0.0f, 0.0f, 0.0f };
 
     pCameraController = createFpsCameraController(camPos, lookAt);
 
@@ -493,12 +493,13 @@ class App : public IApp {
     loadActions.mClearDepth.stencil = 0;
     cmdBindRenderTargets(cmd, 1, &pRenderTarget, pDepthBuffer, &loadActions,
                          NULL, NULL, -1, -1);
+
+	///TODO: investigate why minDepth is 1.0f and maxDepth is 0.0f;
     cmdSetViewport(cmd, 0.0f, 0.0f, (float)pRenderTarget->mWidth,
-                   (float)pRenderTarget->mHeight, 0.0f, 1.0f);
+                   (float)pRenderTarget->mHeight, 1.0f, 0.0f);
     cmdSetScissor(cmd, 0, 0, pRenderTarget->mWidth, pRenderTarget->mHeight);
 
     const uint32_t sphereVbStride = sizeof(float) * 6;
-    const uint32_t skyboxVbStride = sizeof(float) * 4;
 
     ////// draw planets
     cmdBeginGpuTimestampQuery(cmd, gGpuProfileToken, "Draw Spheres");
