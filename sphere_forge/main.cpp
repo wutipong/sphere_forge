@@ -1,4 +1,3 @@
-#include <OS/Core/RingBuffer.h>
 #include <OS/Interfaces/IApp.h>
 #include <OS/Interfaces/ICameraController.h>
 #include <OS/Interfaces/IInput.h>
@@ -38,8 +37,6 @@ Shader *pShader = NULL;
 Buffer *pVertexBuffer = NULL;
 Pipeline *pPipeline = NULL;
 
-GPURingBuffer *pProjViewUniformBuffer[gImageCount] = {NULL};
-
 uint32_t gFrameIndex = 0;
 ProfileToken gGpuProfileToken = PROFILE_INVALID_TOKEN;
 
@@ -51,9 +48,10 @@ RootSignature *pRootSignature = NULL;
 
 constexpr size_t sphereCount = 10000;
 
-DescriptorSet *pDescriptorSetUniforms = {NULL};
+DescriptorSet *pDescriptorSetUniforms[sphereCount] = {NULL};
 vec4 spherePos[sphereCount];
-UniformBlock gUniformData[sphereCount] = {};
+UniformBlock gUniformData[sphereCount];
+Buffer *pProjViewUniformBuffer[gImageCount][sphereCount] = {NULL};
 
 ICameraController *pCameraController = {};
 
@@ -149,12 +147,21 @@ class App : public IApp {
 
     DescriptorSetDesc desc = {pRootSignature, DESCRIPTOR_UPDATE_FREQ_PER_FRAME,
                               gImageCount};
- 
-    addDescriptorSet(pRenderer, &desc, &pDescriptorSetUniforms);
-    
+    for (auto i = 0; i < sphereCount; i++) {
+      addDescriptorSet(pRenderer, &desc, &pDescriptorSetUniforms[i]);
+    }
+
+    BufferLoadDesc ubDesc = {};
+    ubDesc.mDesc.mDescriptors = DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+    ubDesc.mDesc.mMemoryUsage = RESOURCE_MEMORY_USAGE_CPU_TO_GPU;
+    ubDesc.mDesc.mSize = sizeof(UniformBlock);
+    ubDesc.mDesc.mFlags = BUFFER_CREATION_FLAG_PERSISTENT_MAP_BIT;
+    ubDesc.pData = NULL;
     for (uint32_t i = 0; i < gImageCount; ++i) {
-      addUniformGPURingBuffer(pRenderer, 4*1024*1024, &pProjViewUniformBuffer[i],
-                              true);
+      for (auto j = 0; j < sphereCount; j++) {
+        ubDesc.ppBuffer = &pProjViewUniformBuffer[i][j];
+        addResource(&ubDesc, NULL);
+      }
     }
 
     if (!gAppUI.Init(pRenderer))
@@ -224,14 +231,14 @@ class App : public IApp {
 
     // Need to free memory;
     tf_free(pSpherePoints);
-
-    auto size = sizeof(UniformBlock);
-    for (uint32_t i = 0; i < gImageCount; ++i) {
-      DescriptorData params[1] = {};
-      params[0].pName = "rootcbv";
-      params[0].ppBuffers = &pProjViewUniformBuffer[i]->pBuffer;
-      params[0].pSizes = &size;
-      updateDescriptorSet(pRenderer, i, pDescriptorSetUniforms, 1, params);
+    size_t size = sizeof(UniformBlock);
+    for (auto i = 0; i < sphereCount; i++) {
+      for (uint32_t j = 0; j < gImageCount; ++j) {
+        DescriptorData params[1] = {};
+        params[0].pName = "uniformBlock";
+        params[0].ppBuffers = &pProjViewUniformBuffer[j][i];
+        updateDescriptorSet(pRenderer, j, pDescriptorSetUniforms[i], 1, params);
+      }
     }
 
     return true;
@@ -250,11 +257,13 @@ class App : public IApp {
     exitProfiler();
 
     for (uint32_t i = 0; i < gImageCount; ++i) {
-      removeGPURingBuffer(pProjViewUniformBuffer[i]);
+      for (auto j = 0; j < sphereCount; j++) {
+        removeResource(pProjViewUniformBuffer[i][j]);
+      }
     }
-
-	removeDescriptorSet(pRenderer, pDescriptorSetUniforms);
-	
+    for (auto i = 0; i < sphereCount; i++) {
+      removeDescriptorSet(pRenderer, pDescriptorSetUniforms[i]);
+    }
 
     removeResource(pVertexBuffer);
 
@@ -436,16 +445,13 @@ class App : public IApp {
       waitForFences(pRenderer, 1, &pRenderCompleteFence);
 
     // Update uniform buffers
-    GPURingBufferOffset offset =
-        getGPURingBufferOffset(pProjViewUniformBuffer[gFrameIndex],
-                               sizeof(UniformBlock) * sphereCount, 0);
-    BufferUpdateDesc viewProjCbv = {offset.pBuffer, offset.mOffset};
-    beginUpdateResource(&viewProjCbv);
-    memcpy(viewProjCbv.pMappedData, gUniformData,
-           sizeof(UniformBlock) * sphereCount);
-    //*(UniformBlock *)viewProjCbv.pMappedData = gUniformData;
-    endUpdateResource(&viewProjCbv, NULL);
-
+    for (auto i = 0; i < sphereCount; i++) {
+      BufferUpdateDesc viewProjCbv = {pProjViewUniformBuffer[gFrameIndex][i]};
+      beginUpdateResource(&viewProjCbv);
+      viewProjCbv.mSize = sizeof(UniformBlock) * sphereCount;
+      *(UniformBlock *)viewProjCbv.pMappedData = gUniformData[i];
+      endUpdateResource(&viewProjCbv, NULL);
+    }
     // Reset cmd pool for this frame
     resetCmdPool(pRenderer, pCmdPools[gFrameIndex]);
 
@@ -478,10 +484,12 @@ class App : public IApp {
     cmdBeginGpuTimestampQuery(cmd, gGpuProfileToken, "Draw Spheres");
     {
       for (auto i = 0; i < sphereCount; i++) {
+
         cmdBindPipeline(cmd, pPipeline);
-        cmdBindDescriptorSet(cmd, gFrameIndex, pDescriptorSetUniforms);
+        cmdBindDescriptorSet(cmd, gFrameIndex, pDescriptorSetUniforms[i]);
         cmdBindVertexBuffer(cmd, 1, &pVertexBuffer, &sphereVbStride, NULL);
         cmdDraw(cmd, gNumberOfSpherePoints / 6, 0);
+        // cmdDrawInstanced(cmd, gNumberOfSpherePoints / 6, 0, sphereCount, 0);
       }
     }
     cmdEndGpuTimestampQuery(cmd, gGpuProfileToken);
