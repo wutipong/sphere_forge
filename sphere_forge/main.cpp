@@ -64,9 +64,9 @@ constexpr float speed = 500.0f;
 int gNumberOfSpherePoints;
 
 vec4 RandomInsideUnitSphere() {
-	PROFILER_SET_CPU_SCOPE("Spheres", "RandomInsideUnitSphere", 0xFFE8E8);
+  PROFILER_SET_CPU_SCOPE("Spheres", "RandomInsideUnitSphere", 0xFFE8E8);
   auto r = []() {
-    constexpr int range = 100;
+    constexpr int range = 10000;
     int value = rand() % range;
 
     return (float)value / range;
@@ -186,7 +186,7 @@ class App : public IApp {
 
     // Gpu profiler can only be added after initProfile.
     gGpuProfileToken = addGpuProfiler(pRenderer, pGraphicsQueue, "Graphics");
-	
+
     GuiDesc guiDesc = {};
     guiDesc.mStartPosition =
         vec2(mSettings.mWidth * 0.01f, mSettings.mHeight * 0.2f);
@@ -403,34 +403,33 @@ class App : public IApp {
 
     const float aspectInverse =
         (float)mSettings.mHeight / (float)mSettings.mWidth;
-    const float horizontal_fov = 60.0f * PI / 180.0f;
+    const float horizontal_fov = 120.0f * PI / 180.0f;
 
     mat4 projMat =
         mat4::perspective(horizontal_fov, aspectInverse, 0.3f, 1000.0f);
     auto projView = projMat * viewMat;
 
-	PROFILER_SET_CPU_SCOPE("Spheres", "Update position", 0xFFE8E8);
-	{
-		for (auto i = 0; i < sphereCount; i++) {
-			float z = spherePos[i].getZ();
-			if (z < 0) {
-				spherePos[i] = RandomInsideUnitSphere() * 500;
-				z = spherePos[i].getZ() + 1000;
-			}
-			else {
-				z -= deltaTime * speed;
-			}
-			spherePos[i].setZ(z);
+    PROFILER_SET_CPU_SCOPE("Spheres", "Update position", 0xFFE8E8);
+    {
+      for (auto i = 0; i < sphereCount; i++) {
+        float z = spherePos[i].getZ();
+        if (z < 0) {
+          spherePos[i] = RandomInsideUnitSphere() * 500;
+          z = spherePos[i].getZ() + 1000;
+        } else {
+          z -= deltaTime * speed;
+        }
+        spherePos[i].setZ(z);
 
-			gUniformData[i].mProjectView = projMat * viewMat;
-			gUniformData[i].mWorld = mat4::translation(
-				{ spherePos[i].getX(), spherePos[i].getY(), spherePos[i].getZ() });
-			gUniformData[i].mColor = { 0.5f, 0.5f, 1.0f, 1.0f };
-			// point light parameters
-			gUniformData[i].mLightPosition = vec3(0, 0, 0);
-			gUniformData[i].mLightColor = vec3(0.9f, 0.9f, 0.7f); // Pale Yellow
-		}
-	}
+        gUniformData[i].mProjectView = projMat * viewMat;
+        gUniformData[i].mWorld = mat4::translation(
+            {spherePos[i].getX(), spherePos[i].getY(), spherePos[i].getZ()});
+        gUniformData[i].mColor = {0.5f, 0.5f, 1.0f, 1.0f};
+        // point light parameters
+        gUniformData[i].mLightPosition = vec3(0, 0, 0);
+        gUniformData[i].mLightColor = vec3(0.9f, 0.9f, 0.7f); // Pale Yellow
+      }
+    }
     gAppUI.Update(deltaTime);
   }
 
