@@ -46,7 +46,7 @@ UIApp gAppUI;
 
 RootSignature *pRootSignature = NULL;
 
-constexpr size_t sphereCount = 10000;
+constexpr size_t sphereCount = 1000;
 
 DescriptorSet *pDescriptorSetUniforms[sphereCount] = {NULL};
 vec4 spherePos[sphereCount];
@@ -64,6 +64,7 @@ constexpr float speed = 500.0f;
 int gNumberOfSpherePoints;
 
 vec4 RandomInsideUnitSphere() {
+	PROFILER_SET_CPU_SCOPE("Spheres", "RandomInsideUnitSphere", 0xFFE8E8);
   auto r = []() {
     constexpr int range = 100;
     int value = rand() % range;
@@ -185,7 +186,7 @@ class App : public IApp {
 
     // Gpu profiler can only be added after initProfile.
     gGpuProfileToken = addGpuProfiler(pRenderer, pGraphicsQueue, "Graphics");
-
+	
     GuiDesc guiDesc = {};
     guiDesc.mStartPosition =
         vec2(mSettings.mWidth * 0.01f, mSettings.mHeight * 0.2f);
@@ -408,22 +409,28 @@ class App : public IApp {
         mat4::perspective(horizontal_fov, aspectInverse, 0.3f, 1000.0f);
     auto projView = projMat * viewMat;
 
-    for (auto i = 0; i < sphereCount; i++) {
+	PROFILER_SET_CPU_SCOPE("Spheres", "Update position", 0xFFE8E8);
+	{
+		for (auto i = 0; i < sphereCount; i++) {
+			float z = spherePos[i].getZ();
+			if (z < 0) {
+				spherePos[i] = RandomInsideUnitSphere() * 500;
+				z = spherePos[i].getZ() + 1000;
+			}
+			else {
+				z -= deltaTime * speed;
+			}
+			spherePos[i].setZ(z);
 
-      spherePos[i].setZ(spherePos[i].getZ() - deltaTime * speed);
-      if (spherePos[i].getZ() < 0) {
-        spherePos[i] = RandomInsideUnitSphere() * 500.0f;
-        spherePos[i].setZ(spherePos[i].getZ() + 1000);
-      }
-
-      gUniformData[i].mProjectView = projMat * viewMat;
-      gUniformData[i].mWorld = mat4::translation(
-          {spherePos[i].getX(), spherePos[i].getY(), spherePos[i].getZ()});
-      gUniformData[i].mColor = {0.5f, 0.5f, 1.0f, 1.0f};
-      // point light parameters
-      gUniformData[i].mLightPosition = vec3(0, 0, 0);
-      gUniformData[i].mLightColor = vec3(0.9f, 0.9f, 0.7f); // Pale Yellow
-    }
+			gUniformData[i].mProjectView = projMat * viewMat;
+			gUniformData[i].mWorld = mat4::translation(
+				{ spherePos[i].getX(), spherePos[i].getY(), spherePos[i].getZ() });
+			gUniformData[i].mColor = { 0.5f, 0.5f, 1.0f, 1.0f };
+			// point light parameters
+			gUniformData[i].mLightPosition = vec3(0, 0, 0);
+			gUniformData[i].mLightColor = vec3(0.9f, 0.9f, 0.7f); // Pale Yellow
+		}
+	}
     gAppUI.Update(deltaTime);
   }
 
@@ -484,12 +491,10 @@ class App : public IApp {
     cmdBeginGpuTimestampQuery(cmd, gGpuProfileToken, "Draw Spheres");
     {
       for (auto i = 0; i < sphereCount; i++) {
-
         cmdBindPipeline(cmd, pPipeline);
         cmdBindDescriptorSet(cmd, gFrameIndex, pDescriptorSetUniforms[i]);
         cmdBindVertexBuffer(cmd, 1, &pVertexBuffer, &sphereVbStride, NULL);
         cmdDraw(cmd, gNumberOfSpherePoints / 6, 0);
-        // cmdDrawInstanced(cmd, gNumberOfSpherePoints / 6, 0, sphereCount, 0);
       }
     }
     cmdEndGpuTimestampQuery(cmd, gGpuProfileToken);
@@ -500,7 +505,6 @@ class App : public IApp {
                          -1, -1);
     cmdBeginGpuTimestampQuery(cmd, gGpuProfileToken, "Draw UI");
     {
-
       const float txtIndent = 8.f;
       float2 txtSizePx =
           cmdDrawCpuProfile(cmd, float2(txtIndent, 15.f), &gFrameTimeDraw);
