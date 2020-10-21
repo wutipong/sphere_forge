@@ -46,7 +46,7 @@ UIApp gAppUI;
 
 RootSignature *pRootSignature = NULL;
 
-constexpr size_t sphereCount = 1000;
+constexpr size_t sphereCount = 10000;
 
 DescriptorSet *pDescriptorSetUniforms[sphereCount] = {NULL};
 vec4 spherePos[sphereCount];
