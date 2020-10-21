@@ -419,7 +419,7 @@ class App : public IApp {
     const float horizontal_fov = 120.0f * PI / 180.0f;
 
     mat4 projMat =
-        mat4::perspective(horizontal_fov, aspectInverse, 0.3f, 1000.0f);
+        mat4::perspective(horizontal_fov, aspectInverse, 1000.0f, 0.3f);
     auto projView = projMat * viewMat;
 
     PROFILER_SET_CPU_SCOPE("Spheres", "Update position", 0xFFE8E8);
@@ -494,9 +494,8 @@ class App : public IApp {
     cmdBindRenderTargets(cmd, 1, &pRenderTarget, pDepthBuffer, &loadActions,
                          NULL, NULL, -1, -1);
 
-	///TODO: investigate why minDepth is 1.0f and maxDepth is 0.0f;
     cmdSetViewport(cmd, 0.0f, 0.0f, (float)pRenderTarget->mWidth,
-                   (float)pRenderTarget->mHeight, 1.0f, 0.0f);
+                   (float)pRenderTarget->mHeight, 0.0f, 1.0f);
     cmdSetScissor(cmd, 0, 0, pRenderTarget->mWidth, pRenderTarget->mHeight);
 
     const uint32_t sphereVbStride = sizeof(float) * 6;
