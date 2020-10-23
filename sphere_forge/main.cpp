@@ -7,6 +7,9 @@
 #include <Renderer/IResourceLoader.h>
 #include <UI/AppUI.h>
 
+#include <functional>
+#include <random>
+
 struct UniformBlock {
   mat4 mProjectView;
   mat4 mWorld;
@@ -46,7 +49,7 @@ UIApp gAppUI;
 
 RootSignature *pRootSignature = NULL;
 
-constexpr size_t sphereCount = 10000;
+constexpr size_t sphereCount = 10240;
 
 DescriptorSet *pDescriptorSetUniforms[sphereCount] = {NULL};
 vec4 spherePos[sphereCount];
@@ -65,12 +68,9 @@ constexpr float speed = 500.0f;
 int gNumberOfSpherePoints;
 
 vec4 RandomInsideUnitSphere() {
-  auto r = []() {
-    constexpr int range = 10000;
-    int value = rand() % range;
-
-    return (float)value / range;
-  };
+  static std::default_random_engine generator;
+  static std::uniform_real_distribution<float> distribution(0, 1);
+  static auto r = std::bind(distribution, generator);
 
   float x, y, z, d;
   do {
@@ -85,20 +85,15 @@ vec4 RandomInsideUnitSphere() {
 }
 
 vec4 RandomColor() {
-	auto r = []() {
-		constexpr int range = 10000;
-		int value = rand() % range;
+  static std::default_random_engine generator;
+  static std::uniform_real_distribution<float> distribution(0, 1);
+  static auto r = std::bind(distribution, generator);
 
-		return (float)value / range;
-	};
-
-	return { r(), r(), r(), 1.0f };
+  return {r(), r(), r(), 1.0f};
 }
-
 
 class App : public IApp {
   virtual bool Init() {
-	  srand(time(NULL));
     // FILE PATHS
     fsSetPathForResourceDir(pSystemFileIO, RM_CONTENT, RD_SHADER_SOURCES,
                             "Shaders");
@@ -184,8 +179,8 @@ class App : public IApp {
     gAppUI.LoadFont("TitilliumText/TitilliumText-Bold.otf");
 
     CameraMotionParameters cmp{160.0f, 600.0f, 200.0f};
-    vec3 lookAt{0,0,500};
-    vec3 camPos{ 0.0f, 0.0f, 0.0f };
+    vec3 lookAt{0, 0, 500};
+    vec3 camPos{0.0f, 0.0f, 0.0f};
 
     pCameraController = createFpsCameraController(camPos, lookAt);
 
@@ -429,16 +424,16 @@ class App : public IApp {
         if (z < 0) {
           spherePos[i] = RandomInsideUnitSphere() * 500;
           z = spherePos[i].getZ() + 1000;
-		  colors[i] = RandomColor();
+          colors[i] = RandomColor();
         } else {
           z -= deltaTime * speed;
         }
         spherePos[i].setZ(z);
 
-        gUniformData[i].mProjectView = projMat * viewMat;
+        gUniformData[i].mProjectView = projView;
         gUniformData[i].mWorld = mat4::translation(
             {spherePos[i].getX(), spherePos[i].getY(), spherePos[i].getZ()});
-		gUniformData[i].mColor = colors[i];
+        gUniformData[i].mColor = colors[i];
         // point light parameters
         gUniformData[i].mLightPosition = vec3(0, 0, 0);
         gUniformData[i].mLightColor = vec3(0.9f, 0.9f, 0.7f); // Pale Yellow
