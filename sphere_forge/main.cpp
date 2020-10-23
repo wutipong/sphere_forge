@@ -250,6 +250,24 @@ class App : public IApp {
       }
     }
 
+	mat4 viewMat = pCameraController->getViewMatrix();
+	const float aspectInverse =
+		(float)mSettings.mHeight / (float)mSettings.mWidth;
+	const float horizontal_fov = 120.0f * PI / 180.0f;
+	mat4 projMat =
+		mat4::perspective(horizontal_fov, aspectInverse, 1000.0f, 0.3f);
+	auto projView = projMat * viewMat;
+
+	for (int i = 0; i < sphereCount; i++) {
+		gUniformData[i].mProjectView = projView;
+		gUniformData[i].mWorld = mat4::translation(
+			{ spherePos[i].getX(), spherePos[i].getY(), spherePos[i].getZ() });
+		gUniformData[i].mColor = colors[i];
+		// point light parameters
+		gUniformData[i].mLightPosition = vec3(0, 0, 0);
+		gUniformData[i].mLightColor = vec3(0.9f, 0.9f, 0.7f); // Pale Yellow
+	}
+
     return true;
   }
 
@@ -407,15 +425,6 @@ class App : public IApp {
     // Scene Update
     /************************************************************************/
     // update camera with time
-    mat4 viewMat = pCameraController->getViewMatrix();
-
-    const float aspectInverse =
-        (float)mSettings.mHeight / (float)mSettings.mWidth;
-    const float horizontal_fov = 120.0f * PI / 180.0f;
-
-    mat4 projMat =
-        mat4::perspective(horizontal_fov, aspectInverse, 1000.0f, 0.3f);
-    auto projView = projMat * viewMat;
 
     PROFILER_SET_CPU_SCOPE("Spheres", "Update position", 0xFFE8E8);
     {
@@ -430,13 +439,9 @@ class App : public IApp {
         }
         spherePos[i].setZ(z);
 
-        gUniformData[i].mProjectView = projView;
         gUniformData[i].mWorld = mat4::translation(
             {spherePos[i].getX(), spherePos[i].getY(), spherePos[i].getZ()});
         gUniformData[i].mColor = colors[i];
-        // point light parameters
-        gUniformData[i].mLightPosition = vec3(0, 0, 0);
-        gUniformData[i].mLightColor = vec3(0.9f, 0.9f, 0.7f); // Pale Yellow
       }
     }
     gAppUI.Update(deltaTime);
