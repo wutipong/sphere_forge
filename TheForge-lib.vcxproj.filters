@@ -1,0 +1,575 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput">
+      <UniqueIdentifier>{ef5e9419-3511-4350-a1ab-fbaa7301af81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common_3\ThirdParty\OpenSource\gainput\lib\source">
+      <UniqueIdentifier>{1240b164-6da1-4679-b2b8-5e0a733c6e70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common_3\ThirdParty\OpenSource\gainput\lib">
+      <UniqueIdentifier>{2164c5fa-d268-43a1-8b7b-002e7d15e162}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common_3\ThirdParty\OpenSource\gainput">
+      <UniqueIdentifier>{25e812ab-38a3-4fe5-a1b7-94a173bca557}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common_3\ThirdParty\OpenSource">
+      <UniqueIdentifier>{75bca0aa-5639-48ba-a6e7-8318557576ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common_3\ThirdParty">
+      <UniqueIdentifier>{07a4eeab-4fc9-43a0-96b1-30ac2d62f816}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common_3">
+      <UniqueIdentifier>{6cdc6536-75d9-45ec-afd8-39504f5a1213}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\dev">
+      <UniqueIdentifier>{bb67f375-e604-401a-a553-e1e6822bc4b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\pad">
+      <UniqueIdentifier>{ffea2d75-1822-47e4-aaae-b84e91396286}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\mouse">
+      <UniqueIdentifier>{87758a8c-0d3e-4b93-9551-f3af25c3ff91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\touch">
+      <UniqueIdentifier>{4d4d3fec-c066-4e0f-9db7-ba12bbad509d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\builtin">
+      <UniqueIdentifier>{6c241302-7704-44a3-8fa8-a1264e2c749c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\gestures">
+      <UniqueIdentifier>{fd4591c9-3267-4de7-a185-1328ec9f1bb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\keyboard">
+      <UniqueIdentifier>{5c87819e-ffdf-42fd-992b-c645525f071c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\recorder">
+      <UniqueIdentifier>{5c7d495a-98f5-4f4d-8ec6-cf0548d3e46b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common_3\ThirdParty\OpenSource\EASTL">
+      <UniqueIdentifier>{a931b066-f1fe-40bc-8dd7-f0dd8fc38278}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common_3\ThirdParty\OpenSource\basis_universal\transcoder">
+      <UniqueIdentifier>{b80b847f-a89f-419c-9f71-875cdb5619c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common_3\ThirdParty\OpenSource\basis_universal">
+      <UniqueIdentifier>{35fff3b6-4e33-46ad-ac72-2de3cdfbbcb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common_3\Renderer">
+      <UniqueIdentifier>{ab777fbc-a6e2-4cfb-b546-57f3b7c9d331}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common_3\Renderer\Direct3D12">
+      <UniqueIdentifier>{55e9b04c-d20c-449e-b7ef-69dd650678ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common_3\OS\Windows">
+      <UniqueIdentifier>{94babc4b-b006-4c5d-955a-495fe6c6c6d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common_3\OS">
+      <UniqueIdentifier>{8ae27ec4-6c99-4659-9c7c-c1d717e4d76c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common_3\OS\FileSystem">
+      <UniqueIdentifier>{21f0900b-28f9-4127-a805-df8bf5f03da7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common_3\OS\Profiler">
+      <UniqueIdentifier>{b6133e12-5554-4af0-86f3-0c221f4e700b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common_3\OS\Core">
+      <UniqueIdentifier>{7f0189cc-eff2-467d-9fe8-bff6c811ffaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common_3\OS\MemoryTracking">
+      <UniqueIdentifier>{4ccfa6e0-e70b-42c9-a138-595dd51e17b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common_3\OS\Camera">
+      <UniqueIdentifier>{0a7fef84-a473-4eba-a0c4-2a1c620eaa38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common_3\OS\Input">
+      <UniqueIdentifier>{4e7df179-c076-4706-b404-66e60729630e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common_3\OS\Logging">
+      <UniqueIdentifier>{17ed0df0-230a-43ac-8473-0b0cd801f74f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Middleware_3\UI">
+      <UniqueIdentifier>{e6e02faf-e828-4811-a115-891f8dfc1503}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Middleware_3">
+      <UniqueIdentifier>{29f1932f-0074-437d-8978-1c28accd93b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Middleware_3\Text">
+      <UniqueIdentifier>{023653e0-c6b3-433c-80d9-a40893bac27b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common_3\ThirdParty\OpenSource\imgui">
+      <UniqueIdentifier>{e868a7b6-c45a-4f17-ae02-cd2be5927680}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common_3\OS\Interfaces">
+      <UniqueIdentifier>{368e0fe2-beb1-4690-8542-bd980ff7edf8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common_3\OS\Math">
+      <UniqueIdentifier>{6a52bb01-1203-4e85-91b2-9a43be0e1828}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\gainput.cpp">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\GainputAllocator.cpp">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\GainputInputDeltaState.cpp">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\GainputInputDevice.cpp">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\GainputInputManager.cpp">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\GainputInputMap.cpp">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\GainputInputState.cpp">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\GainputMapFilters.cpp">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\dev\GainputDev.cpp">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\dev</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\dev\GainputMemoryStream.cpp">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\dev</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\pad\GainputInputDevicePad.cpp">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\pad</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\mouse\GainputInputDeviceMouse.cpp">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\mouse</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\touch\GainputInputDeviceTouch.cpp">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\touch</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\builtin\GainputInputDeviceBuiltIn.cpp">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\builtin</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\gestures\GainputButtonStickGesture.cpp">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\gestures</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\gestures\GainputDoubleClickGesture.cpp">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\gestures</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\gestures\GainputHoldGesture.cpp">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\gestures</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\gestures\GainputPinchGesture.cpp">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\gestures</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\gestures\GainputRotateGesture.cpp">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\gestures</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\gestures\GainputSimultaneouslyDownGesture.cpp">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\gestures</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\gestures\GainputTapGesture.cpp">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\gestures</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\keyboard\GainputInputDeviceKeyboard.cpp">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\keyboard</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\recorder\GainputInputPlayer.cpp">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\recorder</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\recorder\GainputInputRecorder.cpp">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\recorder</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\recorder\GainputInputRecording.cpp">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\recorder</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\ThirdParty\OpenSource\EASTL\eastl.cpp">
+      <Filter>Common_3\ThirdParty\OpenSource\EASTL</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\ThirdParty\OpenSource\basis_universal\transcoder\basisu_transcoder.cpp">
+      <Filter>Common_3\ThirdParty\OpenSource\basis_universal\transcoder</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\Renderer\CommonShaderReflection.cpp">
+      <Filter>Common_3\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\Renderer\ResourceLoader.cpp">
+      <Filter>Common_3\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\Renderer\Direct3D12\Direct3D12.cpp">
+      <Filter>Common_3\Renderer\Direct3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\Renderer\Direct3D12\Direct3D12Hooks.cpp">
+      <Filter>Common_3\Renderer\Direct3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\Renderer\Direct3D12\Direct3D12Raytracing.cpp">
+      <Filter>Common_3\Renderer\Direct3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\Renderer\Direct3D12\Direct3D12ShaderReflection.cpp">
+      <Filter>Common_3\Renderer\Direct3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\OS\Windows\WindowsBase.cpp">
+      <Filter>Common_3\OS\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\OS\Windows\WindowsFileSystem.cpp">
+      <Filter>Common_3\OS\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\OS\Windows\WindowsLog.cpp">
+      <Filter>Common_3\OS\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\OS\Windows\WindowsStackTraceDump.cpp">
+      <Filter>Common_3\OS\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\OS\Windows\WindowsThread.cpp">
+      <Filter>Common_3\OS\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\OS\Windows\WindowsTime.cpp">
+      <Filter>Common_3\OS\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\OS\FileSystem\FileSystem.cpp">
+      <Filter>Common_3\OS\FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\OS\FileSystem\SystemRun.cpp">
+      <Filter>Common_3\OS\FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\OS\FileSystem\ZipFileSystem.cpp">
+      <Filter>Common_3\OS\FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\OS\Profiler\GpuProfiler.cpp">
+      <Filter>Common_3\OS\Profiler</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\OS\Profiler\ProfilerBase.cpp">
+      <Filter>Common_3\OS\Profiler</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\OS\Profiler\ProfilerWidgetsUI.cpp">
+      <Filter>Common_3\OS\Profiler</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\OS\Core\ThreadSystem.cpp">
+      <Filter>Common_3\OS\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\OS\Core\Timer.cpp">
+      <Filter>Common_3\OS\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\OS\MemoryTracking\MemoryTracking.cpp">
+      <Filter>Common_3\OS\MemoryTracking</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\OS\Camera\CameraController.cpp">
+      <Filter>Common_3\OS\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\OS\Input\InputSystem.cpp">
+      <Filter>Common_3\OS\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\OS\Logging\Log.cpp">
+      <Filter>Common_3\OS\Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Middleware_3\UI\AppUI.cpp">
+      <Filter>Middleware_3\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Middleware_3\UI\ImguiGUIDriver.cpp">
+      <Filter>Middleware_3\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Middleware_3\UI\imgui_user.cpp">
+      <Filter>Middleware_3\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Middleware_3\Text\Fontstash.cpp">
+      <Filter>Middleware_3\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\ThirdParty\OpenSource\imgui\imgui.cpp">
+      <Filter>Common_3\ThirdParty\OpenSource\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\ThirdParty\OpenSource\imgui\imgui_demo.cpp">
+      <Filter>Common_3\ThirdParty\OpenSource\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\ThirdParty\OpenSource\imgui\imgui_draw.cpp">
+      <Filter>Common_3\ThirdParty\OpenSource\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="The-Forge\Common_3\ThirdParty\OpenSource\imgui\imgui_widgets.cpp">
+      <Filter>Common_3\ThirdParty\OpenSource\imgui</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\GainputHelpersEvdev.h">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\GainputWindows.h">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\dev\GainputDev.h">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\dev</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\dev\GainputDevProtocol.h">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\dev</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\dev\GainputMemoryStream.h">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\dev</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\dev\GainputStream.h">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\dev</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\pad\GainputControllerDb.h">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\pad</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\pad\GainputInputDevicePadAndroid.h">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\pad</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\pad\GainputInputDevicePadImpl.h">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\pad</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\pad\GainputInputDevicePadIos.h">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\pad</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\pad\GainputInputDevicePadLinux.h">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\pad</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\pad\GainputInputDevicePadNull.h">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\pad</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\pad\GainputInputDevicePadWin.h">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\pad</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\pad\GainputInputDevicePadWinDirectInput.h">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\pad</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\mouse\GainputInputDeviceMouseEvdev.h">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\mouse\GainputInputDeviceMouseImpl.h">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\mouse\GainputInputDeviceMouseLinux.h">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\mouse\GainputInputDeviceMouseLinuxRaw.h">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\mouse\GainputInputDeviceMouseNull.h">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\mouse\GainputInputDeviceMouseWin.h">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\mouse\GainputInputDeviceMouseWinRaw.h">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\mouse\GainputMouseInfo.h">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\touch\GainputInputDeviceTouchAndroid.h">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\touch</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\touch\GainputInputDeviceTouchImpl.h">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\touch</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\touch\GainputInputDeviceTouchIos.h">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\touch</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\touch\GainputInputDeviceTouchNull.h">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\touch</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\touch\GainputTouchInfo.h">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\touch</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\builtin\GainputInputDeviceBuiltInAndroid.h">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\builtin</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\builtin\GainputInputDeviceBuiltInImpl.h">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\builtin</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\builtin\GainputInputDeviceBuiltInIos.h">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\builtin</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\builtin\GainputInputDeviceBuiltInNull.h">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\builtin</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\keyboard\GainputInputDeviceKeyboardAndroid.h">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\keyboard\GainputInputDeviceKeyboardEvdev.h">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\keyboard\GainputInputDeviceKeyboardImpl.h">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\keyboard\GainputInputDeviceKeyboardIOS.h">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\keyboard\GainputInputDeviceKeyboardLinux.h">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\keyboard\GainputInputDeviceKeyboardNull.h">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\keyboard\GainputInputDeviceKeyboardWin.h">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\keyboard\GainputInputDeviceKeyboardWinRaw.h">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\keyboard\GainputKeyboardKeyNames.h">
+      <Filter>Common_3\ThirdParty\OpenSource\gainput\lib\source\gainput\keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\basis_universal\transcoder\basisu.h">
+      <Filter>Common_3\ThirdParty\OpenSource\basis_universal\transcoder</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\basis_universal\transcoder\basisu_file_headers.h">
+      <Filter>Common_3\ThirdParty\OpenSource\basis_universal\transcoder</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\basis_universal\transcoder\basisu_global_selector_cb.h">
+      <Filter>Common_3\ThirdParty\OpenSource\basis_universal\transcoder</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\basis_universal\transcoder\basisu_global_selector_palette.h">
+      <Filter>Common_3\ThirdParty\OpenSource\basis_universal\transcoder</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\basis_universal\transcoder\basisu_transcoder.h">
+      <Filter>Common_3\ThirdParty\OpenSource\basis_universal\transcoder</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\basis_universal\transcoder\basisu_transcoder_internal.h">
+      <Filter>Common_3\ThirdParty\OpenSource\basis_universal\transcoder</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\Renderer\IRay.h">
+      <Filter>Common_3\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\Renderer\IRenderer.h">
+      <Filter>Common_3\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\Renderer\IResourceLoader.h">
+      <Filter>Common_3\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\Renderer\IShaderReflection.h">
+      <Filter>Common_3\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\Renderer\Direct3D12\Direct3D12CapBuilder.h">
+      <Filter>Common_3\Renderer\Direct3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\Renderer\Direct3D12\Direct3D12Hooks.h">
+      <Filter>Common_3\Renderer\Direct3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\OS\Windows\WindowsStackTraceDump.h">
+      <Filter>Common_3\OS\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\OS\Profiler\GpuProfiler.h">
+      <Filter>Common_3\OS\Profiler</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\OS\Profiler\ProfilerBase.h">
+      <Filter>Common_3\OS\Profiler</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\OS\Profiler\ProfilerHTML.h">
+      <Filter>Common_3\OS\Profiler</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\OS\Core\Atomics.h">
+      <Filter>Common_3\OS\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\OS\Core\Compiler.h">
+      <Filter>Common_3\OS\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\OS\Core\DLL.h">
+      <Filter>Common_3\OS\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\OS\Core\GPUConfig.h">
+      <Filter>Common_3\OS\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\OS\Core\RingBuffer.h">
+      <Filter>Common_3\OS\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\OS\Core\TextureContainers.h">
+      <Filter>Common_3\OS\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\OS\Core\ThreadSystem.h">
+      <Filter>Common_3\OS\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\OS\MemoryTracking\NoMemoryDefines.h">
+      <Filter>Common_3\OS\MemoryTracking</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\OS\Logging\Log.h">
+      <Filter>Common_3\OS\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\OS\Interfaces\IApp.h">
+      <Filter>Common_3\OS\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\OS\Interfaces\ICameraController.h">
+      <Filter>Common_3\OS\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\OS\Interfaces\IFileSystem.h">
+      <Filter>Common_3\OS\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\OS\Interfaces\IInput.h">
+      <Filter>Common_3\OS\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\OS\Interfaces\ILog.h">
+      <Filter>Common_3\OS\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\OS\Interfaces\IMemory.h">
+      <Filter>Common_3\OS\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\OS\Interfaces\IMiddleware.h">
+      <Filter>Common_3\OS\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\OS\Interfaces\IOperatingSystem.h">
+      <Filter>Common_3\OS\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\OS\Interfaces\IProfiler.h">
+      <Filter>Common_3\OS\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\OS\Interfaces\IThread.h">
+      <Filter>Common_3\OS\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\OS\Interfaces\ITime.h">
+      <Filter>Common_3\OS\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\OS\Math\MathTypes.h">
+      <Filter>Common_3\OS\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Middleware_3\UI\AppUI.h">
+      <Filter>Middleware_3\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Middleware_3\UI\imgui_user.h">
+      <Filter>Middleware_3\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Middleware_3\Text\Fontstash.h">
+      <Filter>Middleware_3\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\imgui\imconfig.h">
+      <Filter>Common_3\ThirdParty\OpenSource\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\imgui\imgui.h">
+      <Filter>Common_3\ThirdParty\OpenSource\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="The-Forge\Common_3\ThirdParty\OpenSource\imgui\imgui_internal.h">
+      <Filter>Common_3\ThirdParty\OpenSource\imgui</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="The-Forge\Common_3\ThirdParty\OpenSource\basis_universal\transcoder\basisu_transcoder_tables_astc.inc">
+      <Filter>Common_3\ThirdParty\OpenSource\basis_universal\transcoder</Filter>
+    </None>
+    <None Include="The-Forge\Common_3\ThirdParty\OpenSource\basis_universal\transcoder\basisu_transcoder_tables_astc_0_255.inc">
+      <Filter>Common_3\ThirdParty\OpenSource\basis_universal\transcoder</Filter>
+    </None>
+    <None Include="The-Forge\Common_3\ThirdParty\OpenSource\basis_universal\transcoder\basisu_transcoder_tables_atc_55.inc">
+      <Filter>Common_3\ThirdParty\OpenSource\basis_universal\transcoder</Filter>
+    </None>
+    <None Include="The-Forge\Common_3\ThirdParty\OpenSource\basis_universal\transcoder\basisu_transcoder_tables_atc_56.inc">
+      <Filter>Common_3\ThirdParty\OpenSource\basis_universal\transcoder</Filter>
+    </None>
+    <None Include="The-Forge\Common_3\ThirdParty\OpenSource\basis_universal\transcoder\basisu_transcoder_tables_bc7_m5_alpha.inc">
+      <Filter>Common_3\ThirdParty\OpenSource\basis_universal\transcoder</Filter>
+    </None>
+    <None Include="The-Forge\Common_3\ThirdParty\OpenSource\basis_universal\transcoder\basisu_transcoder_tables_bc7_m5_color.inc">
+      <Filter>Common_3\ThirdParty\OpenSource\basis_universal\transcoder</Filter>
+    </None>
+    <None Include="The-Forge\Common_3\ThirdParty\OpenSource\basis_universal\transcoder\basisu_transcoder_tables_bc7_m6.inc">
+      <Filter>Common_3\ThirdParty\OpenSource\basis_universal\transcoder</Filter>
+    </None>
+    <None Include="The-Forge\Common_3\ThirdParty\OpenSource\basis_universal\transcoder\basisu_transcoder_tables_dxt1_5.inc">
+      <Filter>Common_3\ThirdParty\OpenSource\basis_universal\transcoder</Filter>
+    </None>
+    <None Include="The-Forge\Common_3\ThirdParty\OpenSource\basis_universal\transcoder\basisu_transcoder_tables_dxt1_6.inc">
+      <Filter>Common_3\ThirdParty\OpenSource\basis_universal\transcoder</Filter>
+    </None>
+    <None Include="The-Forge\Common_3\ThirdParty\OpenSource\basis_universal\transcoder\basisu_transcoder_tables_pvrtc2_45.inc">
+      <Filter>Common_3\ThirdParty\OpenSource\basis_universal\transcoder</Filter>
+    </None>
+    <None Include="The-Forge\Common_3\ThirdParty\OpenSource\basis_universal\transcoder\basisu_transcoder_tables_pvrtc2_alpha_33.inc">
+      <Filter>Common_3\ThirdParty\OpenSource\basis_universal\transcoder</Filter>
+    </None>
+  </ItemGroup>
+</Project>
