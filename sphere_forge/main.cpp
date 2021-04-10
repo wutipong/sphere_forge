@@ -2,7 +2,9 @@
 #include <OS/Interfaces/ICameraController.h>
 #include <OS/Interfaces/IInput.h>
 #include <OS/Interfaces/IProfiler.h>
+#include <OS/Interfaces/IThread.h>
 #include <OS/Math/MathTypes.h>
+#include <OS/Core/ThreadSystem.h>
 #include <Renderer/IRenderer.h>
 #include <Renderer/IResourceLoader.h>
 #include <UI/AppUI.h>
@@ -50,6 +52,8 @@ UIApp gAppUI;
 RootSignature* pRootSignature = NULL;
 
 constexpr size_t sphereCount = 1024;
+
+ThreadSystem* pThreadSystem{ nullptr };
 
 DescriptorSet* pDescriptorSetUniforms[sphereCount] = { NULL };
 vec4 spherePos[sphereCount];
@@ -268,6 +272,8 @@ class App : public IApp {
 			gUniformData[i].mLightColor = vec3(0.9f, 0.9f, 0.7f); // Pale Yellow
 		}
 
+		initThreadSystem(&pThreadSystem);
+
 		return true;
 	}
 
@@ -310,6 +316,8 @@ class App : public IApp {
 		exitResourceLoaderInterface(pRenderer);
 		removeQueue(pRenderer, pGraphicsQueue);
 		removeRenderer(pRenderer);
+
+		shutdownThreadSystem(pThreadSystem);
 	}
 
 	bool addSwapChain() {
@@ -444,6 +452,7 @@ class App : public IApp {
 					{ spherePos[i].getX(), spherePos[i].getY(), spherePos[i].getZ() });
 				gUniformData[i].mColor = colors[i];
 			}
+			waitThreadSystemIdle(pThreadSystem);
 		}
 		gAppUI.Update(deltaTime);
 	}
