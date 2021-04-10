@@ -51,7 +51,7 @@ UIApp gAppUI;
 
 RootSignature* pRootSignature = NULL;
 
-constexpr size_t sphereCount = 1024;
+constexpr size_t sphereCount = 10240;
 
 ThreadSystem* pThreadSystem{ nullptr };
 
@@ -94,6 +94,28 @@ vec4 RandomColor() {
 	static auto r = std::bind(distribution, generator);
 
 	return { r(), r(), r(), 1.0f };
+}
+
+struct updateSphereData {
+	float deltaTime;
+};
+
+void updateSphere(void* pData, uintptr_t i) {
+	auto pSphereData = static_cast<updateSphereData*>(pData);
+	float z = spherePos[i].getZ();
+	if (z < 0) {
+		spherePos[i] = RandomInsideUnitSphere() * 500;
+		z = spherePos[i].getZ() + 1000;
+		colors[i] = RandomColor();
+	}
+	else {
+		z -= pSphereData->deltaTime * speed;
+	}
+	spherePos[i].setZ(z);
+
+	gUniformData[i].mWorld = mat4::translation(
+		{ spherePos[i].getX(), spherePos[i].getY(), spherePos[i].getZ() });
+	gUniformData[i].mColor = colors[i];
 }
 
 class App : public IApp {
@@ -436,22 +458,9 @@ class App : public IApp {
 
 		PROFILER_SET_CPU_SCOPE("Spheres", "Update position", 0xFFE8E8);
 		{
-			for (auto i = 0; i < sphereCount; i++) {
-				float z = spherePos[i].getZ();
-				if (z < 0) {
-					spherePos[i] = RandomInsideUnitSphere() * 500;
-					z = spherePos[i].getZ() + 1000;
-					colors[i] = RandomColor();
-				}
-				else {
-					z -= deltaTime * speed;
-				}
-				spherePos[i].setZ(z);
+			updateSphereData data{deltaTime};
 
-				gUniformData[i].mWorld = mat4::translation(
-					{ spherePos[i].getX(), spherePos[i].getY(), spherePos[i].getZ() });
-				gUniformData[i].mColor = colors[i];
-			}
+			addThreadSystemRangeTask(pThreadSystem, updateSphere, &data, sphereCount);
 			waitThreadSystemIdle(pThreadSystem);
 		}
 		gAppUI.Update(deltaTime);
